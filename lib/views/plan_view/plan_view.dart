@@ -13,7 +13,7 @@ import 'package:messdienerplan_webinterface/widgets/data_card_view/data_card_lis
 class PlanView extends StatelessWidget {
   final controller = Get.put(
     DataListViewController<Plan>(
-      (routeSettings) async {
+      (routeParameters) async {
         return Get.find<PlanRepository>();
       },
     ),
@@ -31,6 +31,11 @@ class PlanView extends StatelessWidget {
           title: 'Plan #${data.id.toString()}',
           description:
               '${DateFormat.yMMMd().format(data.dateFrom)} - ${DateFormat.yMMMd().format(data.dateTo)}',
+          onTap: () async {
+            await Get.toNamed(
+                AppRoutes.PLANS_EDIT.replaceAll(':planId', data.id.toString()));
+            await controller.refreshDataList();
+          },
           points: [
             DataCardPoint(
               content: data.public ? 'Öffentlich' : 'Geheim gehalten',
@@ -47,15 +52,6 @@ class PlanView extends StatelessWidget {
                     ),
               onSelected: () {
                 controller.changeData(data..public = !data.public);
-              },
-            ),
-            ClickablePopupMenuItem(
-              title: 'Bearbeiten',
-              icon: Icon(Icons.edit),
-              onSelected: () async {
-                await Get.toNamed(AppRoutes.PLANS_EDIT
-                    .replaceAll(':planId', data.id.toString()));
-                await controller.refreshDataList();
               },
             ),
           ],

@@ -28,11 +28,17 @@ class PageSkeletonHeader extends StatelessWidget {
   final String description;
   final List<PageActionButton> actionButtons;
   final bool loading;
+  final bool showSearch;
+  final void Function(String searchQuery) onSearch;
+  final bool showFilter;
 
   const PageSkeletonHeader({
     Key key,
     @required this.title,
     @required this.description,
+    this.showSearch = false,
+    this.onSearch,
+    this.showFilter = false,
     this.actionButtons = const [],
     this.loading = false,
   }) : super(key: key);
@@ -85,6 +91,25 @@ class PageSkeletonHeader extends StatelessWidget {
             runSpacing: 12,
             children: actionButtons,
           ),
+        if (showSearch) ...[
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                constraints: BoxConstraints(maxWidth: 350),
+                child: TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search_outlined),
+                    hintText: 'Suche',
+                  ),
+                  onChanged: onSearch,
+                ),
+              )
+            ],
+          ),
+        ],
         if (actionButtons.isNotEmpty)
           SizedBox(
             height: 32,

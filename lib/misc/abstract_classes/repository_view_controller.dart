@@ -19,17 +19,58 @@ abstract class RepositoryViewController<DataModel>
   final Future<void> Function(RepositoryViewController<DataModel> controller)
       loadAdditionalData;
 
-  final Map<Type, dynamic> additionalData = {};
+  ///
+  /// Die zusätzlichen Daten, die vielleicht benötigt werden, um das Modell der
+  /// [BaseRepository] zu visualisieren.
+  ///
+  /// Gespeichert werden die Daten nach dem Typ und nach der ID
+  ///
+  final Map<Type, Map<int, dynamic>> _additionalData = {};
 
-  void storeAdditionalData<AdditionalData>(AdditionalData data) {
-    additionalData[AdditionalData] = data;
-  }
-
-  AdditionalData getAdditionalData<AdditionalData>() {
-    return additionalData[AdditionalData] as AdditionalData;
-  }
-
+  ///
+  /// Konstruktor
+  ///
   RepositoryViewController(this.getBaseRepository, this.loadAdditionalData);
+
+  ///
+  /// Funktion zum abrufen der zusätzlichen Daten
+  ///
+  /// [Data] muss angegeben werden, um zu wissen, welche Daten abgerufen werden sollen
+  ///
+  /// [id] ist die ID des Datenmodells
+  ///
+  Data getAdditionalDataById<Data>(int id) {
+    return _additionalData[Data][id];
+  }
+
+  ///
+  /// Funktion zum abrufen der zusätzlichen Daten
+  ///
+  /// [Data] muss angegeben werden, um zu wissen, welche Daten abgerufen werden sollen
+  ///
+  List<Data> getAdditionalDataList<Data>() {
+    return _additionalData[Data].values.cast<Data>().toList();
+  }
+
+  ///
+  /// Funktion zum speichern der zusätzlichen Daten. Die Methode sollte in
+  /// [loadAdditionalData] benutzt werden.
+  ///
+  /// [Data] ist der Typ der Daten, der gespeichert werden soll
+  ///
+  /// [repository] ist die Repository vom Tpy [Data], wovon die Daten abgerufen werden
+  /// können
+  ///
+  Future<void> storeAdditionalData<Data>(
+      BaseRepository<Data> repository) async {
+    var dataList = await repository.getDataList();
+
+    _additionalData[Data] = Map.fromEntries(
+      dataList.map(
+        (e) => MapEntry(repository.getDataId(e), e),
+      ),
+    );
+  }
 
   ///
   /// Beim initialisieren (vor dem Rendern vom ersten Frame) die Repository

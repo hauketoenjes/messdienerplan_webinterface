@@ -6,6 +6,7 @@ import 'package:messdienerplan_webinterface/api/repository/acolyte_repository.da
 import 'package:messdienerplan_webinterface/api/repository/group_repository.dart';
 import 'package:messdienerplan_webinterface/misc/abstract_classes/data_list_view_controller.dart';
 import 'package:messdienerplan_webinterface/misc/utils.dart';
+import 'package:messdienerplan_webinterface/routes/app_pages.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card_point.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card_view/data_card_list_view.dart';
@@ -13,14 +14,20 @@ import 'package:messdienerplan_webinterface/widgets/data_card_view/data_card_lis
 class AcolyteView extends StatelessWidget {
   final controller = Get.put(
     DataListViewController<Acolyte>(
-      (routeSettings) async {
+      (routeParameters) async {
         return Get.find<AcolyteRepository>();
       },
       loadAdditionalData: (controller) async {
-        var groupRepository = Get.find<GroupRepository>();
-        var groups = await groupRepository.getDataList();
+        await controller
+            .storeAdditionalData<Group>(Get.find<GroupRepository>());
+      },
+      matchesSearchQuery: (dataModel, query) {
+        if (query.isEmpty) return true;
 
-        controller.storeAdditionalData<List<Group>>(groups);
+        var lowerQuery = query.toLowerCase();
+
+        return dataModel.firstName.toLowerCase().contains(lowerQuery) ||
+            dataModel.lastName.toLowerCase().contains(lowerQuery);
       },
     ),
   );
@@ -35,9 +42,20 @@ class AcolyteView extends StatelessWidget {
       title: 'Messdiener',
       description: 'Hier können Messdiener erstellt und bearbeitet werden.',
       noDataText: 'Keine Messdiener vorhanden',
+      createNewElementRoute: AppRoutes.ACOLYTES_NEW,
       getDataCard: (data) {
+        var title = data.extra.isNotEmpty
+            ? '${data.firstName} ${data.lastName} (${data.extra})'
+            : '${data.firstName} ${data.lastName}';
         return DataCard(
-          title: '${data.firstName} ${data.lastName}',
+          title: title,
+          onTap: () async {
+            await Get.toNamed(
+              AppRoutes.ACOLYTES_EDIT
+                  .replaceAll(':acolyteId', data.id.toString()),
+            );
+            await controller.refreshDataList();
+          },
           points: [
             DataCardPoint(
               content:
@@ -48,8 +66,7 @@ class AcolyteView extends StatelessWidget {
               content: data.group == null
                   ? 'In keiner Gruppe'
                   : controller
-                      .getAdditionalData<List<Group>>()
-                      .singleWhere((l) => l.id == data.group)
+                      .getAdditionalDataById<Group>(data.group)
                       .groupName,
               icon: Icons.people_outline_outlined,
             )

@@ -60,7 +60,6 @@ abstract class BaseRepository<Data> {
   @protected
   Future<List<Data>> getModelList();
 
-  @protected
   int getDataId(Data data);
 
   @protected

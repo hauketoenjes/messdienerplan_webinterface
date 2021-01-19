@@ -64,6 +64,9 @@ class PageSkeleton extends StatelessWidget {
   final String error;
   final String formError;
   final bool loading;
+  final bool showSearch;
+  final void Function(String searchQuery) onSearch;
+  final bool showFilter;
 
   const PageSkeleton({
     Key key,
@@ -78,6 +81,9 @@ class PageSkeleton extends StatelessWidget {
     this.sliverChildren,
     this.child,
     this.formError = '',
+    this.showSearch = false,
+    this.onSearch,
+    this.showFilter = false,
   })  : assert(
           (sliverChild != null && child == null && sliverChildren == null) ||
               (child != null &&
@@ -96,6 +102,9 @@ class PageSkeleton extends StatelessWidget {
           title: title,
           actionButtons: actionButtons,
           loading: loading,
+          showSearch: showSearch,
+          showFilter: showFilter,
+          onSearch: onSearch,
         ),
       ),
     ];

@@ -9,13 +9,14 @@ class AppRoutes {
   static const PLANS_EDIT = '/plans/:planId/';
   static const PLANS_NEW = '/plans/new/';
   static const PLANS_MASSES = '/plans/:planId/masses/';
-  static const PLANS_MASSES_EDIT = '/plan/:planId/masses/:massId/';
-  static const PLANS_MASSES_NEW = '/plan/:planId/masses/new/';
-  static const PLANS_MASSES_ACOLYTES = '/plan/:planId/masses/:massId/acolytes/';
+  static const PLANS_MASSES_EDIT = '/plans/:planId/masses/:massId/';
+  static const PLANS_MASSES_NEW = '/plans/:planId/masses/new/';
+  static const PLANS_MASSES_ACOLYTES =
+      '/plans/:planId/masses/:massId/acolytes/';
   static const PLANS_MASSES_ACOLYTES_EDIT =
-      '/plan/:planId/masses/:massId/acolytes/:acolyteId/';
+      '/plans/:planId/masses/:massId/acolytes/:acolyteId/';
   static const PLANS_MASSES_ACOLYTES_NEW =
-      '/plan/:planId/masses/:massId/acolytes/new/';
+      '/plans/:planId/masses/:massId/acolytes/new/';
 
   static const ACOLYTES = '/acolytes/';
   static const ACOLYTES_EDIT = '/acolytes/:acolyteId/';

@@ -9,13 +9,42 @@ class DataListViewController<DataModel>
   ///
   var dataModelList = <DataModel>[].obs;
 
+  ///
+  /// Die originale Liste von Daten (wenn sortiert wird etc.)
+  ///
+  var backupDataModelList = <DataModel>[].obs;
+
+  ///
+  /// Der aktuelle Search query, um die Liste zu filtern, wenn sie aktualisert wird.
+  ///
+  String currentQuery = '';
+
+  ///
+  /// Checkt, ob das DataModel bei einem bestimmten search query angezeigt
+  /// werden soll.
+  ///
+  final bool Function(DataModel dataModel, String query) matchesSearchQuery;
+
   DataListViewController(
-      Future<BaseRepository<DataModel>> Function(
-              Map<String, String> routeParameters)
-          getBaseRepository,
-      {Future<void> Function(RepositoryViewController<DataModel> controller)
-          loadAdditionalData})
-      : super(getBaseRepository, loadAdditionalData);
+    Future<BaseRepository<DataModel>> Function(
+            Map<String, String> routeParameters)
+        getBaseRepository, {
+    Future<void> Function(RepositoryViewController<DataModel> controller)
+        loadAdditionalData,
+    this.matchesSearchQuery,
+  }) : super(getBaseRepository, loadAdditionalData);
+
+  ///
+  /// Sortiert die Liste nach dem aktuellen Search query
+  ///
+  void onSearch(String query) {
+    currentQuery = query;
+    dataModelList.assignAll(
+      backupDataModelList.where(
+        (d) => matchesSearchQuery(d, query),
+      ),
+    );
+  }
 
   ///
   /// Wenn der erste Frame gerendert wird, dann das Laden der Daten starten
@@ -37,7 +66,14 @@ class DataListViewController<DataModel>
     loading(true);
 
     try {
-      dataModelList(await baseRepository.getDataList(forceUpdate: forceUpdate));
+      backupDataModelList.assignAll(
+          await baseRepository.getDataList(forceUpdate: forceUpdate));
+      if (currentQuery.isNotEmpty) {
+        onSearch(currentQuery);
+      } else {
+        dataModelList.assignAll(backupDataModelList);
+      }
+
       error('');
     } catch (e) {
       error(e.toString());

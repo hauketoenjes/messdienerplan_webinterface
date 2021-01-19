@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:messdienerplan_webinterface/misc/extension_methods.dart';
 
 part 'models.g.dart';
 
@@ -20,15 +19,6 @@ class Location {
       _$LocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationToJson(this);
-
-  @override
-  bool operator ==(o) =>
-      o is Location && o.id == id && o.locationName == locationName;
-
-  @override
-  String toString() {
-    return '$locationName';
-  }
 }
 
 @JsonSerializable()
@@ -41,14 +31,6 @@ class Role {
   factory Role.fromJson(Map<String, dynamic> json) => _$RoleFromJson(json);
 
   Map<String, dynamic> toJson() => _$RoleToJson(this);
-
-  @override
-  bool operator ==(o) => o is Role && o.id == id && o.roleName == roleName;
-
-  @override
-  String toString() {
-    return '$roleName';
-  }
 }
 
 @JsonSerializable()
@@ -62,12 +44,6 @@ class Group {
   factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
 
   Map<String, dynamic> toJson() => _$GroupToJson(this);
-
-  @override
-  String toString() => '$groupName';
-
-  @override
-  bool operator ==(o) => o is Group && o.id == id && o.groupName == groupName;
 }
 
 @JsonSerializable()
@@ -82,16 +58,6 @@ class Classification {
       _$ClassificationFromJson(json);
 
   Map<String, dynamic> toJson() => _$ClassificationToJson(this);
-
-  @override
-  String toString() => '$ageFrom $ageTo';
-
-  @override
-  bool operator ==(o) =>
-      o is Classification &&
-      o.id == id &&
-      o.ageFrom == ageFrom &&
-      o.ageTo == ageTo;
 }
 
 @JsonSerializable()
@@ -107,14 +73,6 @@ class Type {
   factory Type.fromJson(Map<String, dynamic> json) => _$TypeFromJson(json);
 
   Map<String, dynamic> toJson() => _$TypeToJson(this);
-
-  @override
-  bool operator ==(o) => o is Type && o.id == id && typeName == typeName;
-
-  @override
-  String toString() {
-    return '$typeName';
-  }
 }
 
 @JsonSerializable()
@@ -130,17 +88,6 @@ class Requirement {
       _$RequirementFromJson(json);
 
   Map<String, dynamic> toJson() => _$RequirementToJson(this);
-  @override
-  bool operator ==(o) =>
-      o is Requirement &&
-      o.id == id &&
-      o.quantity == quantity &&
-      o.role == role;
-
-  @override
-  String toString() {
-    return '$quantity';
-  }
 }
 
 @JsonSerializable()
@@ -159,22 +106,11 @@ class Rule {
 
   Map<String, dynamic> toJson() => _$RuleToJson(this);
 
-  @override
-  bool operator ==(o) =>
-      o is Rule &&
-      o.id == id &&
-      o.location == location &&
-      o.time == time &&
-      o.dayOfWeek == dayOfWeek;
-
   static final _dateFormatter = DateFormat('HH:mm:ss');
-  static DateTime _fromJson(String date) => _dateFormatter.parse(date);
-  static String _toJson(DateTime date) => _dateFormatter.format(date);
 
-  @override
-  String toString() {
-    return '${dayOfWeek.value} ${_dateFormatter.format(time)}';
-  }
+  static DateTime _fromJson(String date) => _dateFormatter.parse(date);
+
+  static String _toJson(DateTime date) => _dateFormatter.format(date);
 }
 
 @JsonSerializable()
@@ -202,23 +138,10 @@ class Acolyte {
 
   Map<String, dynamic> toJson() => _$AcolyteToJson(this);
 
-  @override
-  bool operator ==(o) =>
-      o is Acolyte &&
-      o.id == id &&
-      o.firstName == firstName &&
-      o.lastName == lastName &&
-      o.extra == extra &&
-      o.birthday == birthday &&
-      o.group == group;
-
-  @override
-  String toString() {
-    return "$firstName $lastName $extra ${DateFormat("dd.MM.yyyy").format(birthday)}";
-  }
-
   static final _dateFormatter = DateFormat('yyyy-MM-dd');
+
   static DateTime _fromJson(String date) => _dateFormatter.parse(date);
+
   static String _toJson(DateTime date) => _dateFormatter.format(date);
 }
 
@@ -235,20 +158,6 @@ class Mass {
   factory Mass.fromJson(Map<String, dynamic> json) => _$MassFromJson(json);
 
   Map<String, dynamic> toJson() => _$MassToJson(this);
-
-  @override
-  bool operator ==(o) =>
-      o is Mass &&
-      o.id == id &&
-      o.time == time &&
-      o.extra == extra &&
-      o.location == location &&
-      o.type == type;
-
-  @override
-  String toString() {
-    return '${DateFormat.yMMMMEEEEd().add_Hm().format(time)} $extra';
-  }
 }
 
 @JsonSerializable()
@@ -350,6 +259,8 @@ class Plan {
   Map<String, dynamic> toJson() => _$PlanToJson(this);
 
   static final _dateFormatter = DateFormat('yyyy-MM-dd');
+
   static DateTime _fromJson(String date) => _dateFormatter.parse(date);
+
   static String _toJson(DateTime date) => _dateFormatter.format(date);
 }
