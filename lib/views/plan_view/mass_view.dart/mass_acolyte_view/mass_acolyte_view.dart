@@ -6,6 +6,7 @@ import 'package:messdienerplan_webinterface/api/repository/acolyte_repository.da
 import 'package:messdienerplan_webinterface/api/repository/plan_repository.dart';
 import 'package:messdienerplan_webinterface/api/repository/role_repository.dart';
 import 'package:messdienerplan_webinterface/misc/abstract_classes/data_list_view_controller.dart';
+import 'package:messdienerplan_webinterface/routes/app_pages.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card_point.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card_view/data_card_list_view.dart';
@@ -43,13 +44,24 @@ class MassAcolyteView extends StatelessWidget {
       description:
           'Hier werden die Messdiener zu einer bestimmten Messe angezeigt und können bearbeitet werden.',
       noDataText: 'Keine Messdiener eingeteilt',
+      createNewElementRoute: AppRoutes.PLANS_MASSES_ACOLYTES_NEW
+          .replaceAll(':planId', Get.parameters['planId'])
+          .replaceAll(':massId', Get.parameters['massId']),
       getDataCard: (data) {
         var acolyte = controller.getAdditionalDataById<Acolyte>(data.acolyte);
         var role = controller.getAdditionalDataById<Role>(data.role);
 
         return DataCard(
           title: '${acolyte.firstName} ${acolyte.lastName}',
-          onTap: () {},
+          onTap: () async {
+            await Get.toNamed(
+              AppRoutes.PLANS_MASSES_ACOLYTES_EDIT
+                  .replaceAll(':planId', Get.parameters['planId'])
+                  .replaceAll(':massId', Get.parameters['massId'])
+                  .replaceAll(':massAcolyteId', data.id.toString()),
+            );
+            await controller.refreshDataList(forceUpdate: true);
+          },
           points: [
             DataCardPoint(
               content: role.roleName,

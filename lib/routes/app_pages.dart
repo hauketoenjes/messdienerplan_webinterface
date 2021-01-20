@@ -6,6 +6,7 @@ import 'package:messdienerplan_webinterface/views/group_view/group_view.dart';
 import 'package:messdienerplan_webinterface/views/location_view/location_edit_view.dart';
 import 'package:messdienerplan_webinterface/views/location_view/location_view.dart';
 import 'package:messdienerplan_webinterface/views/login_view/login_view.dart';
+import 'package:messdienerplan_webinterface/views/plan_view/mass_view.dart/mass_acolyte_view/mass_acolyte_edit_view.dart';
 import 'package:messdienerplan_webinterface/views/plan_view/mass_view.dart/mass_acolyte_view/mass_acolyte_view.dart';
 import 'package:messdienerplan_webinterface/views/plan_view/mass_view.dart/mass_edit_view.dart';
 import 'package:messdienerplan_webinterface/views/plan_view/mass_view.dart/mass_view.dart';
@@ -66,6 +67,14 @@ class AppPages {
     CustomGetPage(
       name: AppRoutes.PLANS_MASSES_ACOLYTES,
       page: () => BaseSkeleton(child: MassAcolyteView()),
+    ),
+    CustomGetPage(
+      name: AppRoutes.PLANS_MASSES_ACOLYTES_NEW,
+      page: () => BaseSkeleton(child: MassAcolyteEditView(true)),
+    ),
+    CustomGetPage(
+      name: AppRoutes.PLANS_MASSES_ACOLYTES_EDIT,
+      page: () => BaseSkeleton(child: MassAcolyteEditView(false)),
     ),
     CustomGetPage(
       isDrawerItem: true,

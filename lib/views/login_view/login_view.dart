@@ -67,7 +67,7 @@ class LoginView extends StatelessWidget {
                       onFieldSubmitted: (value) async {
                         if (await model.loginUser()) {
                           await Navigator.of(context)
-                              .pushReplacementNamed(AppRoutes.LOCATIONS);
+                              .pushReplacementNamed(AppRoutes.PLANS);
                         }
                       },
                     ),
@@ -87,7 +87,7 @@ class LoginView extends StatelessWidget {
                       onFieldSubmitted: (value) async {
                         if (await model.loginUser()) {
                           await Navigator.of(context)
-                              .pushReplacementNamed(AppRoutes.LOCATIONS);
+                              .pushReplacementNamed(AppRoutes.PLANS);
                         }
                       },
                     ),

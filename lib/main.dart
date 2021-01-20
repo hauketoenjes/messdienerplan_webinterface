@@ -17,6 +17,7 @@ import 'package:messdienerplan_webinterface/misc/app_theme.dart';
 import 'package:messdienerplan_webinterface/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api/repository/acolyte_repository.dart';
+import 'api/repository/user_repository.dart';
 
 Future<void> setupLocator() async {
   var dioClient = dio.Dio();
@@ -83,6 +84,8 @@ Future<void> setupLocator() async {
   Get.put<TypeRepository>(TypeRepository(), permanent: true);
   Get.put<LocationRepository>(LocationRepository(), permanent: true);
   Get.put<PlanRepository>(PlanRepository(), permanent: true);
+
+  Get.put<UserRepository>(UserRepository(), permanent: true);
 }
 
 Future<void> main() async {

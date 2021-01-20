@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gravatar/flutter_gravatar.dart';
 import 'package:get/get.dart';
 import 'package:messdienerplan_webinterface/api/messdiener_api.dart';
+import 'package:messdienerplan_webinterface/api/repository/user_repository.dart';
 import 'package:messdienerplan_webinterface/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,9 +24,49 @@ class HeaderBar extends StatelessWidget {
 
   HeaderBar({Key key, this.showDrawerButton = false}) : super(key: key);
 
+  final userRepository = Get.find<UserRepository>();
+
   @override
   Widget build(BuildContext context) {
     var showBackButton = Navigator.of(context).canPop();
+
+    if (!userRepository.dataLoaded()) {
+      userRepository.initializeData();
+    }
+
+    var userIndicator = Obx(() {
+      if (userRepository.dataLoaded()) {
+        var userIdentifier;
+
+        if (userRepository.email().isNotEmpty) {
+          var gravatar = Gravatar(userRepository.email());
+          var url = gravatar.imageUrl();
+          userIdentifier = Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                  image: NetworkImage(url), fit: BoxFit.contain),
+            ),
+          );
+        } else {
+          var letter = userRepository.firstName().isNotEmpty
+              ? userRepository.firstName()[0].capitalize
+              : userRepository.username().isNotEmpty
+                  ? userRepository.username()[0].capitalize
+                  : 'U';
+          userIdentifier = Text(
+            letter,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+          );
+        }
+
+        return userIdentifier;
+      } else {
+        return Text('U');
+      }
+    });
 
     return Container(
       height: 60,
@@ -101,12 +143,7 @@ class HeaderBar extends StatelessWidget {
                 height: 56,
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).accentColor,
-                  child: Text(
-                    'U',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                  ),
+                  child: userIndicator,
                 ),
               ),
             ),

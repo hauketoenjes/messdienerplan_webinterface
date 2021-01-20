@@ -56,7 +56,7 @@ class DataCardListView<DataModel> extends StatelessWidget {
                   icon: Icon(Icons.add_outlined),
                   onPressed: () async {
                     await Get.toNamed(createNewElementRoute);
-                    await controller.refreshDataList();
+                    await controller.refreshDataList(forceUpdate: true);
                   },
                 ),
             ] +

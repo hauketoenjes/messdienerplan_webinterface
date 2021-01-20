@@ -70,14 +70,17 @@ class NavigationDrawer extends StatelessWidget {
         if (key.isNotEmpty) out.add(NavigationDrawerCategory(key));
 
         out.addAll(
-          value.map(
-            (page) => NavigationDrawerItem(
+          value.map((page) {
+            var parts = currentRoute.split('/');
+            parts.removeWhere((element) => element.isEmpty);
+
+            return NavigationDrawerItem(
               page.drawerTitle,
               page.drawerIcon,
               navigationRoute: page.name,
-              isSelected: currentRoute.contains(page.name),
-            ),
-          ),
+              isSelected: parts.first.contains(page.name.replaceAll('/', '')),
+            );
+          }),
         );
       },
     );

@@ -16,7 +16,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
     var sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.containsKey('token') &&
         sharedPreferences.getString('token') != null) {
-      await Navigator.of(context).pushReplacementNamed(AppRoutes.LOCATIONS);
+      await Navigator.of(context).pushReplacementNamed(AppRoutes.PLANS);
     } else {
       await Navigator.of(context).pushReplacementNamed(AppRoutes.LOGIN);
     }

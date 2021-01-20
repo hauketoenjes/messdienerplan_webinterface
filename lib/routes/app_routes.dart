@@ -14,7 +14,7 @@ class AppRoutes {
   static const PLANS_MASSES_ACOLYTES =
       '/plans/:planId/masses/:massId/acolytes/';
   static const PLANS_MASSES_ACOLYTES_EDIT =
-      '/plans/:planId/masses/:massId/acolytes/:acolyteId/';
+      '/plans/:planId/masses/:massId/acolytes/:massAcolyteId/';
   static const PLANS_MASSES_ACOLYTES_NEW =
       '/plans/:planId/masses/:massId/acolytes/new/';
 

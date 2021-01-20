@@ -22,7 +22,7 @@ dependencies:
   shared_preferences: ^0.5.7
   google_fonts: ^1.1.0
   get: ^3.21.2
-  font_awesome_flutter: ^8.11.0
+  flutter_gravatar: ^1.0.2
   responsive_grid:
     git: https://github.com/hsh-nids/ResponsiveGrid_Flutter
 
