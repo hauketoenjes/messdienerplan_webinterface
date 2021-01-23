@@ -49,7 +49,9 @@ class MassAcolyteView extends StatelessWidget {
           .replaceAll(':massId', Get.parameters['massId']),
       getDataCard: (data) {
         var acolyte = controller.getAdditionalDataById<Acolyte>(data.acolyte);
-        var role = controller.getAdditionalDataById<Role>(data.role);
+        var role = data.role != null
+            ? controller.getAdditionalDataById<Role>(data.role).roleName
+            : 'Messdiener';
 
         return DataCard(
           title: '${acolyte.firstName} ${acolyte.lastName}',
@@ -64,7 +66,7 @@ class MassAcolyteView extends StatelessWidget {
           },
           points: [
             DataCardPoint(
-              content: role.roleName,
+              content: role,
               icon: Icons.label_outlined,
             ),
           ],
