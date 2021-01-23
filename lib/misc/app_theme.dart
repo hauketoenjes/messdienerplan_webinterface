@@ -41,6 +41,9 @@ class AppTheme {
           ),
         ),
       ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: MaterialStateProperty.all<Color>(theme.accentColor),
+      ),
       popupMenuTheme: PopupMenuThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),

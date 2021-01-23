@@ -40,7 +40,7 @@ class LocationView extends StatelessWidget {
           points: [
             DataCardPoint(
               content: 'ID #${data.id}',
-              icon: Icons.fingerprint_outlined,
+              icon: Icons.memory_outlined,
             )
           ],
         );

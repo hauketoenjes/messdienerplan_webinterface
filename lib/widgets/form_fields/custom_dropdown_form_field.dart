@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:messdienerplan_webinterface/widgets/form_fields/custom_form_field.dart';
 
-class CustomDropdownFormField extends StatelessWidget {
+class CustomDropdownFormField<DataType> extends StatelessWidget {
   final String title;
-  final Function(int value) onChanged;
-  final int value;
-  final List<DropdownMenuItem<int>> items;
+  final Function(DataType value) onChanged;
+  final DataType value;
+  final List<DropdownMenuItem<DataType>> items;
 
   const CustomDropdownFormField({
     Key key,
@@ -19,7 +19,7 @@ class CustomDropdownFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomFormField(
       title: title,
-      formField: DropdownButtonFormField<int>(
+      formField: DropdownButtonFormField<DataType>(
         onChanged: onChanged,
         hint: Text(title),
         value: value,

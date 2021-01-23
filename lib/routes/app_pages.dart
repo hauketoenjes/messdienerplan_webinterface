@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:messdienerplan_webinterface/views/acolyte_view/acolyte_edit_view.dart';
+import 'package:messdienerplan_webinterface/views/acolyte_view/acolyte_mass_view/acolyte_mass_view.dart';
 import 'package:messdienerplan_webinterface/views/acolyte_view/acolyte_view.dart';
+import 'package:messdienerplan_webinterface/views/group_view/classification_view/classification_edit_view.dart';
+import 'package:messdienerplan_webinterface/views/group_view/classification_view/classification_view.dart';
 import 'package:messdienerplan_webinterface/views/group_view/group_edit_view.dart';
 import 'package:messdienerplan_webinterface/views/group_view/group_view.dart';
 import 'package:messdienerplan_webinterface/views/location_view/location_edit_view.dart';
@@ -15,6 +18,10 @@ import 'package:messdienerplan_webinterface/views/plan_view/plan_view.dart';
 import 'package:messdienerplan_webinterface/views/role_view/role_edit_view.dart';
 import 'package:messdienerplan_webinterface/views/role_view/role_view.dart';
 import 'package:messdienerplan_webinterface/views/splash_screen_view/splash_screen_view.dart';
+import 'package:messdienerplan_webinterface/views/type_view/requirement_view/requirement_edit_view.dart';
+import 'package:messdienerplan_webinterface/views/type_view/requirement_view/requirement_view.dart';
+import 'package:messdienerplan_webinterface/views/type_view/rule_view/rule_edit_view.dart';
+import 'package:messdienerplan_webinterface/views/type_view/rule_view/rule_view.dart';
 import 'package:messdienerplan_webinterface/views/type_view/type_edit_view.dart';
 import 'package:messdienerplan_webinterface/views/type_view/type_view.dart';
 import 'package:messdienerplan_webinterface/widgets/skeletons/base_skeleton/base_skeleton.dart';
@@ -39,7 +46,7 @@ class AppPages {
     CustomGetPage(
       isDrawerItem: true,
       drawerTitle: 'Pläne',
-      drawerCategoryName: DrawerCategories.MASS_DATA,
+      drawerCategoryName: DrawerCategories.PLAN_DATA,
       drawerIcon: Icons.calendar_today_outlined,
       name: AppRoutes.PLANS,
       page: () => BaseSkeleton(child: PlanView()),
@@ -79,7 +86,7 @@ class AppPages {
     CustomGetPage(
       isDrawerItem: true,
       drawerTitle: 'Messdiener',
-      drawerCategoryName: DrawerCategories.MASS_DATA,
+      drawerCategoryName: DrawerCategories.PLAN_DATA,
       drawerIcon: Icons.person_outlined,
       name: AppRoutes.ACOLYTES,
       page: () => BaseSkeleton(child: AcolyteView()),
@@ -93,9 +100,13 @@ class AppPages {
       page: () => BaseSkeleton(child: AcolyteEditView(false)),
     ),
     CustomGetPage(
+      name: AppRoutes.ACOLYTES_MASSES,
+      page: () => BaseSkeleton(child: AcolyteMassView()),
+    ),
+    CustomGetPage(
       isDrawerItem: true,
       drawerTitle: 'Orte',
-      drawerCategoryName: DrawerCategories.MASS_DATA,
+      drawerCategoryName: DrawerCategories.ACOLYTE_MANAGEMENT,
       drawerIcon: Icons.map_outlined,
       name: AppRoutes.LOCATIONS,
       page: () => BaseSkeleton(child: LocationView()),
@@ -141,6 +152,18 @@ class AppPages {
       page: () => BaseSkeleton(child: GroupEditView(false)),
     ),
     CustomGetPage(
+      name: AppRoutes.GROUPS_CLASSIFICATIONS,
+      page: () => BaseSkeleton(child: ClassificationView()),
+    ),
+    CustomGetPage(
+      name: AppRoutes.GROUPS_CLASSIFICATIONS_NEW,
+      page: () => BaseSkeleton(child: ClassificationEditView(true)),
+    ),
+    CustomGetPage(
+      name: AppRoutes.GROUPS_CLASSIFICATIONS_EDIT,
+      page: () => BaseSkeleton(child: ClassificationEditView(false)),
+    ),
+    CustomGetPage(
       isDrawerItem: true,
       drawerTitle: 'Messetypen',
       drawerCategoryName: DrawerCategories.ACOLYTE_MANAGEMENT,
@@ -155,6 +178,30 @@ class AppPages {
     CustomGetPage(
       name: AppRoutes.TYPES_EDIT,
       page: () => BaseSkeleton(child: TypeEditView(false)),
+    ),
+    CustomGetPage(
+      name: AppRoutes.TYPES_RULES,
+      page: () => BaseSkeleton(child: RuleView()),
+    ),
+    CustomGetPage(
+      name: AppRoutes.TYPES_RULES_NEW,
+      page: () => BaseSkeleton(child: RuleEditView(true)),
+    ),
+    CustomGetPage(
+      name: AppRoutes.TYPES_RULES_EDIT,
+      page: () => BaseSkeleton(child: RuleEditView(false)),
+    ),
+    CustomGetPage(
+      name: AppRoutes.TYPES_REQUIREMENTS,
+      page: () => BaseSkeleton(child: RequirementView()),
+    ),
+    CustomGetPage(
+      name: AppRoutes.TYPES_REQUIREMENTS_NEW,
+      page: () => BaseSkeleton(child: RequirementEditView(true)),
+    ),
+    CustomGetPage(
+      name: AppRoutes.TYPES_REQUIREMENTS_EDIT,
+      page: () => BaseSkeleton(child: RequirementEditView(false)),
     ),
   ];
 }

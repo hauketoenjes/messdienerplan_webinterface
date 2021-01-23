@@ -65,9 +65,15 @@ abstract class RepositoryViewController<DataModel>
       BaseRepository<Data> repository) async {
     var dataList = await repository.getDataList();
 
-    _additionalData[Data] = Map.fromEntries(
-      dataList.map(
-        (e) => MapEntry(repository.getDataId(e), e),
+    if (_additionalData[Data] == null) {
+      _additionalData[Data] = <int, dynamic>{};
+    }
+
+    _additionalData[Data].addAll(
+      Map.fromEntries(
+        dataList.map(
+          (e) => MapEntry(repository.getDataId(e), e),
+        ),
       ),
     );
   }

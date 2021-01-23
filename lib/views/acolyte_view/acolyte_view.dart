@@ -74,7 +74,13 @@ class AcolyteView extends StatelessWidget {
           actions: [
             ElevatedButton(
               child: Text('Messen anzeigen'),
-              onPressed: () {},
+              onPressed: () async {
+                await Get.toNamed(
+                  AppRoutes.ACOLYTES_MASSES
+                      .replaceAll(':acolyteId', data.id.toString()),
+                );
+                await controller.refreshDataList();
+              },
             )
           ],
         );

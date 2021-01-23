@@ -67,7 +67,7 @@ class AcolyteEditView extends DataEditViewWidget {
             dataModel.refresh();
           },
         ),
-        CustomDropdownFormField(
+        CustomDropdownFormField<int>(
           title: 'Gruppe',
           onChanged: (value) => dataModel().group = value,
           value: dataModel().group,

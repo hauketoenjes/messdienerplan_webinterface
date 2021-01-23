@@ -32,8 +32,8 @@ class DataCardListView<DataModel> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => PageSkeleton(
+    return Obx(() {
+      return PageSkeleton(
         title: title,
         description: description,
         hasData: controller.dataModelList.isNotEmpty,
@@ -70,7 +70,7 @@ class DataCardListView<DataModel> extends StatelessWidget {
                 .toList(),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

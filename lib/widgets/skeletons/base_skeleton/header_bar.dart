@@ -126,6 +126,13 @@ class HeaderBar extends StatelessWidget {
                       return;
                     }
                     break;
+                  case 1:
+                    if (Get.isDarkMode) {
+                      Get.changeThemeMode(ThemeMode.light);
+                    } else {
+                      Get.changeThemeMode(ThemeMode.dark);
+                    }
+                    break;
                   default:
                     break;
                 }
@@ -133,8 +140,20 @@ class HeaderBar extends StatelessWidget {
               itemBuilder: (BuildContext context) {
                 return [
                   PopupMenuItem(
-                    child: Text('Ausloggen'),
+                    child: ListTile(
+                      title: Text('Ausloggen'),
+                      leading: Icon(
+                        Icons.logout,
+                      ),
+                    ),
                     value: 0,
+                  ),
+                  PopupMenuItem(
+                    child: ListTile(
+                      title: Text('Thema wechseln'),
+                      leading: Icon(Icons.brightness_3),
+                    ),
+                    value: 1,
                   ),
                 ];
               },

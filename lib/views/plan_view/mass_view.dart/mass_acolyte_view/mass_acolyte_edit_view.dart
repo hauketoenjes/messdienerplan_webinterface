@@ -52,7 +52,7 @@ class MassAcolyteEditView extends DataEditViewWidget {
       noDataText: 'Messdiener konnte nicht geladen oder erstellt werden',
       createNewEntry: createNewEntry,
       formChildren: (dataModel) => [
-        CustomDropdownFormField(
+        CustomDropdownFormField<int>(
           title: 'Messdiener',
           onChanged: (value) => dataModel().acolyte = value,
           value: dataModel().acolyte,
@@ -66,7 +66,7 @@ class MassAcolyteEditView extends DataEditViewWidget {
             );
           }).toList(),
         ),
-        CustomDropdownFormField(
+        CustomDropdownFormField<int>(
           title: 'Rolle',
           onChanged: (value) => dataModel().role = value,
           value: dataModel().role,

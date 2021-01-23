@@ -73,7 +73,7 @@ class MassEditView extends DataEditViewWidget {
           initialValue: dataModel().extra,
           onChanged: (value) => dataModel().extra = value,
         ),
-        CustomDropdownFormField(
+        CustomDropdownFormField<int>(
           title: 'Ort',
           onChanged: (value) => dataModel().location = value,
           value: dataModel().location,
@@ -85,7 +85,7 @@ class MassEditView extends DataEditViewWidget {
                   ))
               .toList(),
         ),
-        CustomDropdownFormField(
+        CustomDropdownFormField<int>(
           title: 'Typ',
           onChanged: (value) => dataModel().type = value,
           value: dataModel().type,
