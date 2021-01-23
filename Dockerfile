@@ -11,9 +11,6 @@ RUN apt-get install --no-install-recommends --no-install-suggests -y jq
 # Shell Skript zum Generieren der Config ins Root Verzeichnis kopieren
 COPY generate_config.sh /
 
-# Das generate_config Skript ausführbar machen
-RUN ["chmod", "+x", "/generate_config.sh"]
-
 # Das Shell Skript als Entrypoint setzen um sicherzugehen, dass es beim Starten generiert wird
 ENTRYPOINT [ "/generate_config.sh" ]
 
