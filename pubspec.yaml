@@ -1,5 +1,5 @@
 name: messdienerplan_webinterface
-description: Verwalten von Messdienern, Messen Orten und dem Messdienerplan.
+description: Verwalten von Messdienern, Messen, Orten und dem Messdienerplan.
 
 version: 1.0.0
 
@@ -19,7 +19,7 @@ dependencies:
   json_serializable: ^3.3.0
   dio: ^3.0.9
   http: ^0.12.2
-  shared_preferences: ^0.5.7
+  shared_preferences: 0.5.12+4
   google_fonts: ^1.1.0
   get: ^3.21.2
   flutter_gravatar: ^1.0.2
