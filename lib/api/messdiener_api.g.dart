@@ -59,7 +59,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(acolyte?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/acolytes/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -80,7 +79,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(acolyte?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/acolytes/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -101,7 +99,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(acolyte?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/acolytes/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -175,7 +172,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(location?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/locations/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -196,7 +192,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(location?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/locations/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -217,7 +212,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(location?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/locations/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -291,7 +285,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(role?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/roles/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -312,7 +305,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(role?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/roles/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -333,7 +325,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(role?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/roles/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -407,7 +398,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(group?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/groups/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -428,7 +418,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(group?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/groups/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -449,7 +438,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(group?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/groups/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -528,7 +516,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(classification?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/groups/$groupId/classifications/',
         queryParameters: queryParameters,
@@ -552,7 +539,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(classification?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/groups/$groupId/classifications/$id/',
         queryParameters: queryParameters,
@@ -575,7 +561,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(classification?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/groups/$groupId/classifications/$id/',
         queryParameters: queryParameters,
@@ -651,7 +636,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(plan?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/plans/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -672,7 +656,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(plan?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/plans/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -693,7 +676,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(plan?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/plans/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -729,7 +711,7 @@ class _MessdienerApiClient implements MessdienerApiClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    await _dio.request<void>('plans/$id/generate/',
+    await _dio.request<void>('/plans/$id/generate/',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -741,14 +723,14 @@ class _MessdienerApiClient implements MessdienerApiClient {
   }
 
   @override
-  Future<void> createImportPlan(plan) async {
+  Future<Plan> createImportPlan(plan) async {
     ArgumentError.checkNotNull(plan, 'plan');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(plan?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
-    await _dio.request<void>('plans/create_import_plan/',
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/plans/create_import_plan/',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
@@ -756,7 +738,8 @@ class _MessdienerApiClient implements MessdienerApiClient {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    return null;
+    final value = Plan.fromJson(_result.data);
+    return value;
   }
 
   @override
@@ -807,7 +790,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(mass?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/plans/$planId/masses/',
         queryParameters: queryParameters,
@@ -830,7 +812,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(mass?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/plans/$planId/masses/$id/',
         queryParameters: queryParameters,
@@ -853,7 +834,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(mass?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/plans/$planId/masses/$id/',
         queryParameters: queryParameters,
@@ -929,7 +909,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(type?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/types/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -950,7 +929,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(type?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/types/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -971,7 +949,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(type?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/types/$id/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -1048,7 +1025,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(rule?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/types/$typeId/rules/',
         queryParameters: queryParameters,
@@ -1071,7 +1047,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(rule?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/types/$typeId/rules/$id/',
         queryParameters: queryParameters,
@@ -1094,7 +1069,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(rule?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/types/$typeId/rules/$id/',
         queryParameters: queryParameters,
@@ -1175,7 +1149,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(requirement?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/types/$typeId/requirements/',
         queryParameters: queryParameters,
@@ -1198,7 +1171,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(requirement?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/types/$typeId/requirements/$id/',
         queryParameters: queryParameters,
@@ -1221,7 +1193,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(requirement?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/types/$typeId/requirements/$id/',
         queryParameters: queryParameters,
@@ -1305,7 +1276,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(massAcolyte?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/plans/$planId/masses/$massId/acolytes/',
         queryParameters: queryParameters,
@@ -1329,7 +1299,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(massAcolyte?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/plans/$planId/masses/$massId/acolytes/$id/',
         queryParameters: queryParameters,
@@ -1353,7 +1322,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(massAcolyte?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>(
         '/plans/$planId/masses/$massId/acolytes/$id/',
         queryParameters: queryParameters,
@@ -1434,7 +1402,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(model?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/auth/login/',
         queryParameters: queryParameters,
         options: RequestOptions(
@@ -1470,7 +1437,6 @@ class _MessdienerApiClient implements MessdienerApiClient {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(model?.toJson() ?? <String, dynamic>{});
-    _data.removeWhere((k, v) => v == null);
     await _dio.request<void>('/auth/password/change/',
         queryParameters: queryParameters,
         options: RequestOptions(

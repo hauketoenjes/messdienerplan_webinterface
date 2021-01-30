@@ -9,6 +9,8 @@ import 'package:messdienerplan_webinterface/widgets/data_card/clickable_popup_me
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card_point.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card_view/data_card_list_view.dart';
+import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_action_button.dart';
+import 'package:messdienerplan_webinterface/widgets/stepper_widgets/stepper/create_new_plan/create_new_plan_assistant.dart';
 
 class PlanView extends StatelessWidget {
   final controller = Get.put(
@@ -26,6 +28,20 @@ class PlanView extends StatelessWidget {
       description: 'Hier könne Pläne erstellt und bearbeitet werden.',
       noDataText: 'Keine Pläne vorhanden',
       createNewElementRoute: AppRoutes.PLANS_NEW,
+      additionalActionButtons: [
+        PageActionButton(
+          label: 'Plan Assistent',
+          icon: Icon(Icons.assistant),
+          onPressed: () async {
+            await showDialog(
+                context: context,
+                builder: (context) {
+                  return CreateNewPlanAssistant();
+                });
+            await controller.refreshDataList();
+          },
+        ),
+      ],
       getDataCard: (data) {
         return DataCard(
           title: 'Plan #${data.id.toString()}',
@@ -63,7 +79,7 @@ class PlanView extends StatelessWidget {
                     .replaceAll(':planId', data.id.toString()));
                 await controller.refreshDataList();
               },
-            )
+            ),
           ],
         );
       },

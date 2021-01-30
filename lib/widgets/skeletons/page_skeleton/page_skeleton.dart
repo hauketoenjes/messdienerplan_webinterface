@@ -67,6 +67,7 @@ class PageSkeleton extends StatelessWidget {
   final bool showSearch;
   final void Function(String searchQuery) onSearch;
   final bool showFilter;
+  final String initialSearchValue;
 
   const PageSkeleton({
     Key key,
@@ -84,6 +85,7 @@ class PageSkeleton extends StatelessWidget {
     this.showSearch = false,
     this.onSearch,
     this.showFilter = false,
+    this.initialSearchValue,
   })  : assert(
           (sliverChild != null && child == null && sliverChildren == null) ||
               (child != null &&
@@ -105,6 +107,7 @@ class PageSkeleton extends StatelessWidget {
           showSearch: showSearch,
           showFilter: showFilter,
           onSearch: onSearch,
+          initialSearchValue: initialSearchValue,
         ),
       ),
     ];
@@ -141,7 +144,6 @@ class PageSkeleton extends StatelessWidget {
     //
     // if(hasError) -> Fehlermeldung
     // else if(!hasData && !loading) -> Keine Daten
-    // else if(!hasData && loading) -> Lade Indikator
     // else -> Daten anzeigen
     //
     //
@@ -204,29 +206,6 @@ class PageSkeleton extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 32.0),
                   child: Text(
                     noDataText.isEmpty ? 'Keine Daten vorhanden' : noDataText,
-                    style: Theme.of(context).textTheme.headline5,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    } else if (!hasData && loading) {
-      slivers.add(
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 32.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircularProgressIndicator(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: Text(
-                    'Lade Daten',
                     style: Theme.of(context).textTheme.headline5,
                     textAlign: TextAlign.center,
                   ),

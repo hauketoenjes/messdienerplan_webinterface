@@ -6,6 +6,7 @@ class CustomDropdownFormField<DataType> extends StatelessWidget {
   final Function(DataType value) onChanged;
   final DataType value;
   final List<DropdownMenuItem<DataType>> items;
+  final String nullValueTitle;
 
   const CustomDropdownFormField({
     Key key,
@@ -13,6 +14,7 @@ class CustomDropdownFormField<DataType> extends StatelessWidget {
     @required this.onChanged,
     @required this.value,
     @required this.items,
+    this.nullValueTitle,
   }) : super(key: key);
 
   @override
@@ -21,9 +23,16 @@ class CustomDropdownFormField<DataType> extends StatelessWidget {
       title: title,
       formField: DropdownButtonFormField<DataType>(
         onChanged: onChanged,
-        hint: Text(title),
+        hint: Text(nullValueTitle ?? title),
         value: value,
-        items: items,
+        items: <DropdownMenuItem<DataType>>[
+          if (nullValueTitle != null)
+            DropdownMenuItem(
+              child: Text(nullValueTitle),
+              value: null,
+            ),
+          ...items,
+        ],
       ),
     );
   }

@@ -5,7 +5,6 @@ class AppRoutes {
   static const LOGIN = '/login/';
 
   static const PLANS = '/plans/';
-  static const PLANS_ = '/plans/assistant/';
   static const PLANS_EDIT = '/plans/:planId/';
   static const PLANS_NEW = '/plans/new/';
   static const PLANS_MASSES = '/plans/:planId/masses/';

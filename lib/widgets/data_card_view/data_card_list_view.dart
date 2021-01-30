@@ -42,6 +42,7 @@ class DataCardListView<DataModel> extends StatelessWidget {
         loading: controller.loading(),
         showSearch: controller.matchesSearchQuery != null,
         onSearch: controller.onSearch,
+        initialSearchValue: controller.currentQuery,
         actionButtons: [
               PageActionButton(
                 label: 'Aktualisieren',

@@ -49,6 +49,11 @@ class AppTheme {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
+      dialogTheme: DialogTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
     );
   }
 

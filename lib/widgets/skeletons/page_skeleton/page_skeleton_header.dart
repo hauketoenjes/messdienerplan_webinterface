@@ -31,6 +31,7 @@ class PageSkeletonHeader extends StatelessWidget {
   final bool showSearch;
   final void Function(String searchQuery) onSearch;
   final bool showFilter;
+  final String initialSearchValue;
 
   const PageSkeletonHeader({
     Key key,
@@ -41,6 +42,7 @@ class PageSkeletonHeader extends StatelessWidget {
     this.showFilter = false,
     this.actionButtons = const [],
     this.loading = false,
+    this.initialSearchValue,
   }) : super(key: key);
 
   @override
@@ -99,7 +101,8 @@ class PageSkeletonHeader extends StatelessWidget {
             children: [
               Container(
                 constraints: BoxConstraints(maxWidth: 350),
-                child: TextField(
+                child: TextFormField(
+                  initialValue: initialSearchValue,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search_outlined),
                     hintText: 'Suche',

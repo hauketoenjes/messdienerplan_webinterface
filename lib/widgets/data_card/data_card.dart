@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 import 'clickable_popup_menu_item/clickable_popup_menu_item.dart';
 
@@ -39,60 +40,73 @@ class DataCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(8),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      title,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                  if (popupMenuItems.isNotEmpty)
-                    PopupMenuButton<int>(
-                      onSelected: (value) => popupMenuItems[value].onSelected(),
-                      itemBuilder: (context) {
-                        return popupMenuItems
-                            .map((e) =>
-                                e.popupMenuEntry(popupMenuItems.indexOf(e)))
-                            .toList();
-                      },
-                    ),
-                ],
-              ),
-              if (popupMenuItems.isEmpty && points.isNotEmpty)
-                SizedBox(height: 8),
-              if (description.isNotEmpty)
-                Text(
-                  description,
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-              if (points.isNotEmpty) ...[
-                SizedBox(height: 4),
-                ...points,
-              ],
-              if (actions.isNotEmpty) ...[
-                SizedBox(height: 16),
-                Wrap(
-                  alignment: WrapAlignment.end,
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: actions,
-                ),
-              ]
-            ],
-          ),
-        ),
+    return PlayAnimation<double>(
+      tween: Tween<double>(
+        begin: 0,
+        end: 1,
       ),
+      duration: Duration(milliseconds: 150),
+      builder: (context, child, value) {
+        return Opacity(
+          opacity: value,
+          child: Card(
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: onTap,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        if (popupMenuItems.isNotEmpty)
+                          PopupMenuButton<int>(
+                            onSelected: (value) =>
+                                popupMenuItems[value].onSelected(),
+                            itemBuilder: (context) {
+                              return popupMenuItems
+                                  .map((e) => e.popupMenuEntry(
+                                      popupMenuItems.indexOf(e)))
+                                  .toList();
+                            },
+                          ),
+                      ],
+                    ),
+                    if (popupMenuItems.isEmpty && points.isNotEmpty)
+                      SizedBox(height: 8),
+                    if (description.isNotEmpty)
+                      Text(
+                        description,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    if (points.isNotEmpty) ...[
+                      SizedBox(height: 4),
+                      ...points,
+                    ],
+                    if (actions.isNotEmpty) ...[
+                      SizedBox(height: 16),
+                      Wrap(
+                        alignment: WrapAlignment.end,
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: actions,
+                      ),
+                    ]
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

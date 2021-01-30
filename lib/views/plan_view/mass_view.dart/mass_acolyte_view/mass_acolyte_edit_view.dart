@@ -68,6 +68,7 @@ class MassAcolyteEditView extends DataEditViewWidget {
         ),
         CustomDropdownFormField<int>(
           title: 'Rolle',
+          nullValueTitle: 'Keine Rolle',
           onChanged: (value) => dataModel().role = value,
           value: dataModel().role,
           items: controller

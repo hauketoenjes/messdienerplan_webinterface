@@ -132,11 +132,11 @@ abstract class MessdienerApiClient {
   @DELETE('/plans/{id}/')
   Future<void> deletePlan(@Path() int id);
 
-  @GET('plans/{id}/generate/')
+  @GET('/plans/{id}/generate/')
   Future<void> generatePlan(@Path() int id);
 
-  @POST('plans/create_import_plan/')
-  Future<void> createImportPlan(@Body() Plan plan);
+  @POST('/plans/create_import_plan/')
+  Future<Plan> createImportPlan(@Body() Plan plan);
 
   /// Mass Endpoint
 

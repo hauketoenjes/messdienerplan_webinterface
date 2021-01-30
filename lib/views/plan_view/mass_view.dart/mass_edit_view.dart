@@ -87,6 +87,7 @@ class MassEditView extends DataEditViewWidget {
         ),
         CustomDropdownFormField<int>(
           title: 'Typ',
+          nullValueTitle: 'Kein Typ',
           onChanged: (value) => dataModel().type = value,
           value: dataModel().type,
           items: controller
