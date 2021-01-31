@@ -3,6 +3,12 @@ import 'package:get/get.dart';
 import 'package:messdienerplan_webinterface/misc/abstract_classes/data_edit_view_controller.dart';
 import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_skeleton.dart';
 
+///
+/// DataEditView zum bearbeiten eines [DataModel] mithilfe des [DataEditViewController]'s
+///
+/// [formChildren] definieren die Felder, mit denen das [DataModel] modifiziert
+/// werden kann.
+///
 class DataEditView<DataModel> extends StatelessWidget {
   final String newDataTitle;
   final String editDataTitle;

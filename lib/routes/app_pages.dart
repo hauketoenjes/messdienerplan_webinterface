@@ -31,6 +31,13 @@ import 'drawer_categories.dart';
 
 part 'app_routes.dart';
 
+///
+/// Die Seiten, die die App hat. Jede Seite zu der navigiert werden kann muss in
+/// [routes] definiert werden.
+///
+/// Wenn eine Seite im Drawer auftauchen soll, dann muss [isDrawerItem] auf true
+/// gesetzt werden.
+///
 class AppPages {
   static const INITIAL = AppRoutes.SPLASH_SCREEN;
 

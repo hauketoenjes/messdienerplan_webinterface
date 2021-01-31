@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 ///
-/// Ein Wrapper für ein [PopupMenuItem] um es in StatelessWidgets Clickbar zu machen
-/// ohne manuell eine Value anzugeben. Wird z.B. verwendet in [DataCard].
+/// Ein Wrapper für ein [PopupMenuItem] um es in StatelessWidgets klickbar zu machen
+/// ohne manuell eine Value anzugeben.
 ///
 /// Der [title] wird als Text im PopupMenuEntry angezeigt
 ///

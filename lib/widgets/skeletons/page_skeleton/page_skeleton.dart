@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:messdienerplan_webinterface/widgets/animations/fade_in_animation.dart';
 
 import 'page_action_button.dart';
 import 'page_skeleton_header.dart';
@@ -151,38 +153,40 @@ class PageSkeleton extends StatelessWidget {
     if (error.isNotEmpty) {
       slivers.add(
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 32.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  constraints: BoxConstraints(maxWidth: 400),
-                  child: Image.network(
-                    'assets/undraw_server_down.svg',
+          child: FadeInAnimation(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    constraints: BoxConstraints(maxHeight: 200),
+                    child: SvgPicture.network(
+                      'assets/undraw_server_down.svg',
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: Text(
-                    'Fehler beim Laden der Daten',
-                    style: Theme.of(context).textTheme.headline5,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 32.0),
+                    child: Text(
+                      'Fehler beim Laden der Daten',
+                      style: Theme.of(context).textTheme.headline5,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Text(
-                    error,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: Theme.of(context).errorColor),
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: Text(
+                      error,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Theme.of(context).errorColor),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -190,27 +194,29 @@ class PageSkeleton extends StatelessWidget {
     } else if (!hasData && !loading) {
       slivers.add(
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 32.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  constraints: BoxConstraints(maxWidth: 400),
-                  child: Image.network(
-                    'assets/undraw_empty_street.svg',
+          child: FadeInAnimation(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    constraints: BoxConstraints(maxHeight: 200),
+                    child: SvgPicture.network(
+                      'assets/undraw_empty_street.svg',
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: Text(
-                    noDataText.isEmpty ? 'Keine Daten vorhanden' : noDataText,
-                    style: Theme.of(context).textTheme.headline5,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 32.0),
+                    child: Text(
+                      noDataText.isEmpty ? 'Keine Daten vorhanden' : noDataText,
+                      style: Theme.of(context).textTheme.headline5,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

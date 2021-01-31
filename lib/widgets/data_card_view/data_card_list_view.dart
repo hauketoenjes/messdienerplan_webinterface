@@ -5,6 +5,12 @@ import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page
 import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_skeleton.dart';
 import 'package:responsive_grid/responsive_sliver_grid_list.dart';
 
+///
+/// View, um mit einem [DataListViewController] eine Liste von Daten anzuzeigen.
+///
+/// Die Methode [getDataCard] muss angegeben werden um ein Widget zu bauen, welches
+/// die Daten anzeigt.
+///
 class DataCardListView<DataModel> extends StatelessWidget {
   final DataListViewController<DataModel> controller;
   final String title;

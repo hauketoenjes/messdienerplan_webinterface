@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:messdienerplan_webinterface/widgets/form_fields/custom_form_field.dart';
 
+///
+/// FormField um Text zu bearbeiten.
+///
 class CustomTextFormField extends StatelessWidget {
   final String initialValue;
   final String title;

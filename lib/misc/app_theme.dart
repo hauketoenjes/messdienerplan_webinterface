@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+///
+/// Definiert das alle Farben und Themes der App.
+///
 class AppTheme {
   static ThemeData getTheme(Brightness brightness) {
     var theme = brightness == Brightness.light ? _lightTheme : _darkTheme;

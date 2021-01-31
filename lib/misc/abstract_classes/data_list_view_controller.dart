@@ -2,6 +2,12 @@ import 'package:messdienerplan_webinterface/api/repository/base_repository.dart'
 import 'package:messdienerplan_webinterface/misc/abstract_classes/repository_view_controller.dart';
 import 'package:get/get.dart';
 
+///
+/// Controller zum anzeigen von einer Datenliste von [DataModel]'s.
+///
+/// Bietet die Möglichkeit Daten zu suchen, filtern und durch z.B. QuickActions
+/// zu bearbeiten.
+///
 class DataListViewController<DataModel>
     extends RepositoryViewController<DataModel> {
   ///

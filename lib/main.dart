@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart' as dio;
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -103,7 +104,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       defaultTransition: Transition.noTransition,
-      themeMode: ThemeMode.dark,
+      themeMode: kDebugMode ? ThemeMode.dark : ThemeMode.system,
       darkTheme: AppTheme.getTheme(Brightness.dark),
       theme: AppTheme.getTheme(Brightness.light),
       localizationsDelegates: [

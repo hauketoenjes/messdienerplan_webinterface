@@ -2,6 +2,11 @@ import 'package:get/get.dart';
 import 'package:messdienerplan_webinterface/api/repository/base_repository.dart';
 import 'package:messdienerplan_webinterface/misc/abstract_classes/repository_view_controller.dart';
 
+///
+/// Controller für eine Seite zum Bearbeiten eines [DataModel].
+///
+/// Bietet die Möglichkeit Daten zu bearbeiten, zu löschen oder neu zu erstellen.
+///
 class DataEditViewController<DataModel>
     extends RepositoryViewController<DataModel> {
   ///
@@ -32,6 +37,9 @@ class DataEditViewController<DataModel>
     super.onReady();
   }
 
+  ///
+  /// Initilasisiert das [DataModel].
+  ///
   Future<void> initializeDataModel() async {
     loading(true);
     try {
@@ -42,6 +50,11 @@ class DataEditViewController<DataModel>
     loading(false);
   }
 
+  ///
+  /// Modifiziert das [DataModel].
+  ///
+  /// Gibt einen boolean zurück, ob die Operation fehlgeschlagen ist oder nicht.
+  ///
   Future<bool> modifyData() async {
     loading(true);
 
@@ -58,6 +71,11 @@ class DataEditViewController<DataModel>
     }
   }
 
+  ///
+  /// Löscht das [DataModel].
+  ///
+  /// Gibt einen boolean zurück, ob die Operation fehlgeschlagen ist oder nicht.
+  ///
   Future<bool> deleteData() async {
     loading(true);
 
@@ -74,6 +92,11 @@ class DataEditViewController<DataModel>
     }
   }
 
+  ///
+  /// Erstellt ein neues [DataModel].
+  ///
+  /// Gibt einen boolean zurück, ob die Operation fehlgeschlagen ist oder nicht.
+  ///
   Future<bool> createData() async {
     loading(true);
 

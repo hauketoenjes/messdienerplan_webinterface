@@ -1,5 +1,9 @@
 part of 'app_pages.dart';
 
+///
+/// Die Routen der App. Zu jeder Route sollte es einen Eintrag in [AppPages.routes]
+/// geben.
+///
 class AppRoutes {
   static const SPLASH_SCREEN = '/';
   static const LOGIN = '/login/';

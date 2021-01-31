@@ -1,5 +1,8 @@
 import 'package:messdienerplan_webinterface/api/model/models.dart';
 
+///
+/// Extension um die Wochentage als String zu bekommen.
+///
 extension DayOfWeekExtension on DayOfWeek {
   String get value {
     switch (this) {

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:messdienerplan_webinterface/widgets/form_fields/custom_form_field.dart';
 
+///
+/// FormField ein DropDown Button anzuzeigen, welcher Items mit value Typ [DataType]
+/// beinhaltet.
+///
 class CustomDropdownFormField<DataType> extends StatelessWidget {
   final String title;
   final Function(DataType value) onChanged;

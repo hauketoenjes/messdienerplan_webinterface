@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+///
+/// Punkt, welcher im unteren Bereich einer [DataCard] angezeigt wird.
+///
+/// Zeigt ein [icon] und den [content] in einer Reihe an.
+///
 class DataCardPoint extends StatelessWidget {
   final String content;
   final IconData icon;

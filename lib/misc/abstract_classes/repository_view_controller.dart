@@ -2,6 +2,9 @@ import 'package:get/get.dart';
 import 'package:messdienerplan_webinterface/api/repository/base_repository.dart';
 import 'package:messdienerplan_webinterface/misc/abstract_classes/page_skeleton_view_controller.dart';
 
+///
+/// Controller, welcher eine [BaseRepository] und zusätzliche Daten speichern kann.
+///
 abstract class RepositoryViewController<DataModel>
     extends PageSkeletonViewController {
   ///

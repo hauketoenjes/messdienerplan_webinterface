@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:messdienerplan_webinterface/widgets/form_fields/custom_form_field.dart';
 
+///
+/// FormField um eine Ganzzahl zu bearbeiten
+///
 class CustomIntFormField extends StatelessWidget {
   final int initialValue;
   final String title;

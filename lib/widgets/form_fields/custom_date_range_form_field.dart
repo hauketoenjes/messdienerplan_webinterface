@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:messdienerplan_webinterface/widgets/form_fields/custom_form_field.dart';
 
+///
+/// FormField um ein Datums-Bereich auszuwählen.
+///
 class CustomDateRangeFormField extends StatelessWidget {
   final String title;
   final DateTime dateFrom;

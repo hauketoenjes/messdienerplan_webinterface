@@ -24,6 +24,7 @@ dependencies:
   get: ^3.21.2
   flutter_gravatar: ^1.0.2
   simple_animations: ^2.5.0
+  flutter_svg: ^0.20.0-nullsafety.3
   responsive_grid:
     git: https://github.com/hsh-nids/ResponsiveGrid_Flutter
 

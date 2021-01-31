@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+///
+/// Widget um FormFelder einheitlich aussehen zu lassen. Zeigt einen [title]
+/// und das [formField] an.
+///
 class CustomFormField extends StatelessWidget {
   final String title;
   final Widget formField;
