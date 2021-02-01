@@ -4,7 +4,7 @@ import 'package:simple_animations/simple_animations.dart';
 ///
 /// Eine Fade-In-Animation die [duration] lang läuft.
 ///
-/// Wenn [duration] nicht angegeben ist, dann dauer die Animation 150ms.
+/// Wenn [duration] nicht angegeben ist, dann dauert die Animation 150ms.
 ///
 class FadeInAnimation extends StatelessWidget {
   final Widget child;

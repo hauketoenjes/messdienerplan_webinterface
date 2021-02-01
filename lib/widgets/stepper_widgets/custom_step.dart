@@ -12,7 +12,7 @@ class CustomStep {
 
   const CustomStep({
     @required this.title,
-    @required this.subtitle,
+    this.subtitle,
     @required this.content,
     @required this.id,
     @required this.currentId,
@@ -24,7 +24,9 @@ class CustomStep {
   Step getStep() {
     return Step(
       title: Text(title),
-      subtitle: Text(currentId > id ? completedSubtitle : subtitle),
+      subtitle: subtitle != null
+          ? Text(currentId > id ? completedSubtitle ?? subtitle : subtitle)
+          : Text(''),
       content: error ? errorContent : content,
       state: error
           ? StepState.error

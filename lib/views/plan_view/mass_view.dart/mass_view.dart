@@ -10,6 +10,8 @@ import 'package:messdienerplan_webinterface/routes/app_pages.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card_point.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card_view/data_card_list_view.dart';
+import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_action_button.dart';
+import 'package:messdienerplan_webinterface/widgets/stepper_widgets/stepper/generate_plan/generate_plan_assistant.dart';
 
 class MassView extends StatelessWidget {
   final controller = Get.put(
@@ -41,6 +43,22 @@ class MassView extends StatelessWidget {
       noDataText: 'Keine Messen vorhanden',
       createNewElementRoute: AppRoutes.PLANS_MASSES_NEW
           .replaceAll(':planId', Get.parameters['planId']),
+      additionalActionButtons: [
+        PageActionButton(
+          label: 'Plan generieren',
+          icon: Icon(Icons.casino_outlined),
+          onPressed: () async {
+            await showDialog(
+                context: context,
+                builder: (context) {
+                  return GeneratePlanAssistant(
+                    planId: int.tryParse(Get.parameters['planId']),
+                  );
+                });
+            await controller.refreshDataList(forceUpdate: true);
+          },
+        ),
+      ],
       getDataCard: (data) {
         return DataCard(
           title: dateTimeFormat.format(data.time.toLocal()),

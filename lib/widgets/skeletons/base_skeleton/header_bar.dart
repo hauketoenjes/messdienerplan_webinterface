@@ -82,6 +82,7 @@ class HeaderBar extends StatelessWidget {
                 child: Builder(
                   builder: (BuildContext context) {
                     return IconButton(
+                      tooltip: 'Menü öffnen',
                       icon: Icon(Icons.notes_outlined),
                       onPressed: () {
                         Scaffold.of(context).openDrawer();
@@ -96,6 +97,7 @@ class HeaderBar extends StatelessWidget {
                 child: Builder(
                   builder: (BuildContext context) {
                     return IconButton(
+                      tooltip: 'Zurück',
                       icon: Icon(Icons.arrow_back),
                       onPressed: () {
                         Get.back();

@@ -46,7 +46,7 @@ class CreateNewPlanAssistant extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.all(8),
                     child: Text(
                       'Dieser Assistent hilft dabei einen neuen Plan mit Messen zu erstellen und importieren.',
                     ),
@@ -79,8 +79,12 @@ class CreateNewPlanAssistant extends StatelessWidget {
                         completedSubtitle: controller.dateTimeRange() != null
                             ? '${dateFormat.format(controller.dateTimeRange().start)} - ${dateFormat.format(controller.dateTimeRange().end)}'
                             : '',
-                        content: SelectDateStep(
-                          onChanged: (value) => controller.dateTimeRange(value),
+                        content: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SelectDateStep(
+                            onChanged: (value) =>
+                                controller.dateTimeRange(value),
+                          ),
                         ),
                       ).getStep(),
                       CustomStep(

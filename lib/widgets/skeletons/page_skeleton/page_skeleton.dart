@@ -204,7 +204,7 @@ class PageSkeleton extends StatelessWidget {
                   Container(
                     constraints: BoxConstraints(maxHeight: 200),
                     child: SvgPicture.network(
-                      'assets/undraw_empty_street.svg',
+                      'assets/undraw_empty.svg',
                     ),
                   ),
                   Padding(
@@ -227,9 +227,11 @@ class PageSkeleton extends StatelessWidget {
       }
 
       if (child != null) {
-        slivers.add(SliverToBoxAdapter(
-          child: child,
-        ));
+        slivers.add(
+          SliverToBoxAdapter(
+            child: child,
+          ),
+        );
       }
 
       if (sliverChildren != null) {
