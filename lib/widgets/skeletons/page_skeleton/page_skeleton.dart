@@ -1,6 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:messdienerplan_webinterface/widgets/animations/fade_in_animation.dart';
 
 import 'page_action_button.dart';
@@ -162,7 +162,7 @@ class PageSkeleton extends StatelessWidget {
                 children: [
                   Container(
                     constraints: BoxConstraints(maxHeight: 200),
-                    child: SvgPicture.network(
+                    child: Image.network(
                       'assets/undraw_server_down.svg',
                     ),
                   ),
@@ -203,7 +203,7 @@ class PageSkeleton extends StatelessWidget {
                 children: [
                   Container(
                     constraints: BoxConstraints(maxHeight: 200),
-                    child: SvgPicture.network(
+                    child: Image.network(
                       'assets/undraw_empty.svg',
                     ),
                   ),

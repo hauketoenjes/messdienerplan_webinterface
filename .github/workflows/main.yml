@@ -26,8 +26,8 @@ jobs:
         name: Flutter Web aktivieren
         run: flutter config --enable-web
       - 
-        name: Projekt für Web bauen
-        run: flutter build web
+        name: Projekt für Web bauen (html renderer)
+        run: flutter build web --web-renderer html
       - 
         name: Build Artefakte hochladen
         uses: actions/upload-artifact@master
