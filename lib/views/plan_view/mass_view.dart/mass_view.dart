@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:messdienerplan_webinterface/api/messdiener_api.dart';
 import 'package:messdienerplan_webinterface/api/model/models.dart';
 import 'package:messdienerplan_webinterface/api/repository/location_repository.dart';
 import 'package:messdienerplan_webinterface/api/repository/plan_repository.dart';
@@ -56,6 +60,34 @@ class MassView extends StatelessWidget {
                   );
                 });
             await controller.refreshDataList(forceUpdate: true);
+          },
+        ),
+        PageActionButton(
+          label: 'Plan herunterladen',
+          icon: Icon(Icons.download_outlined),
+          onPressed: () async {
+            // TODO Hier ist eventuell ein Browser-Download sinnvoller als die Datei
+            // erst in den Arbeitsspeicher zu laden. Außerdem wäre der Dateiname
+            // dann der gleiche wie beim Server.
+
+            controller.loading(true);
+
+            var client = Get.find<MessdienerApiClient>();
+            try {
+              final rawData = await client
+                  .downloadOdfDocument(int.tryParse(Get.parameters['planId']));
+              final content = base64Encode(rawData);
+              AnchorElement(
+                  href:
+                      'data:application/octet-stream;charset=utf-16le;base64,$content')
+                ..setAttribute('download',
+                    "${DateFormat("yyyyMMdd", "de_DE").format(DateTime.now())}-messdienerplan.odf")
+                ..click();
+            } catch (e) {
+              controller.formError(e.toString());
+            }
+
+            controller.loading(false);
           },
         ),
       ],

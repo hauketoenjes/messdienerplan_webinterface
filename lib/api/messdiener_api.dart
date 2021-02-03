@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
 import 'model/models.dart';
 
@@ -143,6 +143,10 @@ abstract class MessdienerApiClient {
 
   @POST('/plans/{id}/delete_masses_without_type/')
   Future<void> deleteMassesWithoutType(@Path() int id);
+
+  @GET('/plans/{id}/generate_odf_document/')
+  @DioResponseType(ResponseType.bytes)
+  Future<List<int>> downloadOdfDocument(@Path() int id);
 
   /// Mass Endpoint
 

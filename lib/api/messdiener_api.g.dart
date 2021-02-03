@@ -777,6 +777,26 @@ class _MessdienerApiClient implements MessdienerApiClient {
   }
 
   @override
+  Future<List<int>> downloadOdfDocument(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<List<dynamic>>(
+        '/plans/$id/generate_odf_document/',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl,
+            responseType: ResponseType.bytes),
+        data: _data);
+    final value = _result.data.cast<int>();
+    return value;
+  }
+
+  @override
   Future<List<Mass>> getMasses(planId) async {
     ArgumentError.checkNotNull(planId, 'planId');
     const _extra = <String, dynamic>{};
