@@ -11,6 +11,7 @@ import 'package:messdienerplan_webinterface/api/repository/plan_repository.dart'
 import 'package:messdienerplan_webinterface/api/repository/type_repository.dart';
 import 'package:messdienerplan_webinterface/misc/abstract_classes/data_list_view_controller.dart';
 import 'package:messdienerplan_webinterface/routes/app_pages.dart';
+import 'package:messdienerplan_webinterface/widgets/data_card/clickable_popup_menu_item/clickable_popup_menu_item.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card_point.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card_view/data_card_list_view.dart';
@@ -92,8 +93,11 @@ class MassView extends StatelessWidget {
         ),
       ],
       getDataCard: (data) {
+        var title = dateTimeFormat.format(data.time.toLocal());
+        if (data.canceled) title = '${title} (abgesagt)';
+
         return DataCard(
-          title: dateTimeFormat.format(data.time.toLocal()),
+          title: title,
           onTap: () async {
             await Get.toNamed(
               AppRoutes.PLANS_MASSES_EDIT
@@ -120,6 +124,17 @@ class MassView extends StatelessWidget {
                   ? 'Kein Typ angegeben'
                   : controller.getAdditionalDataById<Type>(data.type).typeName,
               icon: Icons.flag_outlined,
+            ),
+          ],
+          popupMenuItems: [
+            ClickablePopupMenuItem(
+              title: data.canceled ? 'Messe findet statt' : 'Messe absagen',
+              icon: data.canceled
+                  ? Icon(Icons.toggle_off_outlined)
+                  : Icon(Icons.toggle_on_outlined),
+              onSelected: () {
+                controller.changeData(data..canceled = !data.canceled);
+              },
             ),
           ],
           actions: [

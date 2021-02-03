@@ -153,8 +153,15 @@ class Mass {
   String extra;
   int location;
   int type;
+  bool canceled;
 
-  Mass({this.id, this.time, this.extra, this.location, this.type});
+  Mass(
+      {this.id,
+      this.time,
+      this.extra,
+      this.location,
+      this.type,
+      this.canceled});
 
   factory Mass.fromJson(Map<String, dynamic> json) => _$MassFromJson(json);
 

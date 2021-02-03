@@ -190,6 +190,7 @@ Mass _$MassFromJson(Map<String, dynamic> json) {
     extra: json['extra'] as String,
     location: json['location'] as int,
     type: json['type'] as int,
+    canceled: json['canceled'] as bool,
   );
 }
 
@@ -199,6 +200,7 @@ Map<String, dynamic> _$MassToJson(Mass instance) => <String, dynamic>{
       'extra': instance.extra,
       'location': instance.location,
       'type': instance.type,
+      'canceled': instance.canceled,
     };
 
 MassAcolyte _$MassAcolyteFromJson(Map<String, dynamic> json) {
