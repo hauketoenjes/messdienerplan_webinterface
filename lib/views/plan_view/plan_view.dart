@@ -61,11 +61,7 @@ class PlanView extends StatelessWidget {
           popupMenuItems: [
             ClickablePopupMenuItem(
               title: data.public ? 'Geheim halten' : 'Veröffentlichen',
-              icon: data.public
-                  ? Icon(Icons.public_off)
-                  : Icon(
-                      Icons.public,
-                    ),
+              icon: data.public ? Icon(Icons.public_off) : Icon(Icons.public),
               onSelected: () {
                 controller.changeData(data..public = !data.public);
               },

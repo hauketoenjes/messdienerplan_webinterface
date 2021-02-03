@@ -7,6 +7,7 @@ import 'package:messdienerplan_webinterface/api/repository/group_repository.dart
 import 'package:messdienerplan_webinterface/misc/abstract_classes/data_list_view_controller.dart';
 import 'package:messdienerplan_webinterface/misc/utils.dart';
 import 'package:messdienerplan_webinterface/routes/app_pages.dart';
+import 'package:messdienerplan_webinterface/widgets/data_card/clickable_popup_menu_item/clickable_popup_menu_item.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card/data_card_point.dart';
 import 'package:messdienerplan_webinterface/widgets/data_card_view/data_card_list_view.dart';
@@ -40,13 +41,21 @@ class AcolyteView extends StatelessWidget {
     return DataCardListView<Acolyte>(
       controller: controller,
       title: 'Messdiener',
-      description: 'Hier können Messdiener erstellt und bearbeitet werden.',
+      description:
+          'Hier können Messdiener erstellt und bearbeitet werden. Messdiener können auf "Inaktiv" gesetzt werden, damit sie beim Plan generien nicht mehr eingeteilt werden.',
       noDataText: 'Keine Messdiener vorhanden',
       createNewElementRoute: AppRoutes.ACOLYTES_NEW,
       getDataCard: (data) {
-        var title = data.extra.isNotEmpty
-            ? '${data.firstName} ${data.lastName} (${data.extra})'
-            : '${data.firstName} ${data.lastName}';
+        var title = '${data.firstName} ${data.lastName}';
+
+        if (data.extra.isNotEmpty) {
+          title = '${title} (${data.extra})';
+        }
+
+        if (data.inactive) {
+          title = '${title} (inaktiv)';
+        }
+
         return DataCard(
           title: title,
           onTap: () async {
@@ -70,6 +79,19 @@ class AcolyteView extends StatelessWidget {
                       .groupName,
               icon: Icons.people_outline_outlined,
             )
+          ],
+          popupMenuItems: [
+            ClickablePopupMenuItem(
+              title: data.inactive
+                  ? 'Auf "Aktiv" setzten'
+                  : 'Auf "Inaktiv" setzen',
+              icon: data.inactive
+                  ? Icon(Icons.toggle_off_outlined)
+                  : Icon(Icons.toggle_on_outlined),
+              onSelected: () {
+                controller.changeData(data..inactive = !data.inactive);
+              },
+            ),
           ],
           actions: [
             ElevatedButton(

@@ -119,11 +119,11 @@ class Acolyte {
   String firstName;
   String lastName;
   String extra;
+  bool inactive;
+  int group;
 
   @JsonKey(fromJson: _fromJson, toJson: _toJson)
   DateTime birthday;
-
-  int group;
 
   Acolyte(
       {this.id,
@@ -131,7 +131,8 @@ class Acolyte {
       this.lastName,
       this.extra,
       this.birthday,
-      this.group});
+      this.group,
+      this.inactive});
 
   factory Acolyte.fromJson(Map<String, dynamic> json) =>
       _$AcolyteFromJson(json);

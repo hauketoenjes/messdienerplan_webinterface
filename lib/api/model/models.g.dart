@@ -169,6 +169,7 @@ Acolyte _$AcolyteFromJson(Map<String, dynamic> json) {
     extra: json['extra'] as String,
     birthday: Acolyte._fromJson(json['birthday'] as String),
     group: json['group'] as int,
+    inactive: json['inactive'] as bool,
   );
 }
 
@@ -177,8 +178,9 @@ Map<String, dynamic> _$AcolyteToJson(Acolyte instance) => <String, dynamic>{
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'extra': instance.extra,
-      'birthday': Acolyte._toJson(instance.birthday),
+      'inactive': instance.inactive,
       'group': instance.group,
+      'birthday': Acolyte._toJson(instance.birthday),
     };
 
 Mass _$MassFromJson(Map<String, dynamic> json) {
