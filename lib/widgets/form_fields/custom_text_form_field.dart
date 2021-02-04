@@ -8,12 +8,14 @@ class CustomTextFormField extends StatelessWidget {
   final String initialValue;
   final String title;
   final Function(String value) onChanged;
+  final bool obscureText;
 
   const CustomTextFormField({
     Key key,
     @required this.title,
     @required this.initialValue,
     @required this.onChanged,
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: title,
         ),
+        obscureText: obscureText,
       ),
     );
   }

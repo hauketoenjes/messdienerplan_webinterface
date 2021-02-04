@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:messdienerplan_webinterface/api/messdiener_api.dart';
 import 'package:messdienerplan_webinterface/api/repository/user_repository.dart';
 import 'package:messdienerplan_webinterface/routes/app_pages.dart';
+import 'package:messdienerplan_webinterface/widgets/dialogs/change_password/change_password_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///
@@ -129,6 +130,14 @@ class HeaderBar extends StatelessWidget {
                     }
                     break;
                   case 1:
+                    await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return ChangePasswordDialog();
+                      },
+                    );
+                    break;
+                  case 2:
                     if (Get.isDarkMode) {
                       Get.changeThemeMode(ThemeMode.light);
                     } else {
@@ -144,18 +153,23 @@ class HeaderBar extends StatelessWidget {
                   PopupMenuItem(
                     child: ListTile(
                       title: Text('Ausloggen'),
-                      leading: Icon(
-                        Icons.logout,
-                      ),
+                      leading: Icon(Icons.logout),
                     ),
                     value: 0,
+                  ),
+                  PopupMenuItem(
+                    child: ListTile(
+                      title: Text('Passwort ändern'),
+                      leading: Icon(Icons.lock_outlined),
+                    ),
+                    value: 1,
                   ),
                   PopupMenuItem(
                     child: ListTile(
                       title: Text('Thema wechseln'),
                       leading: Icon(Icons.brightness_3),
                     ),
-                    value: 1,
+                    value: 2,
                   ),
                 ];
               },
