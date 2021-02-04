@@ -82,7 +82,7 @@ class MassView extends StatelessWidget {
                   href:
                       'data:application/octet-stream;charset=utf-16le;base64,$content')
                 ..setAttribute('download',
-                    "${DateFormat("yyyyMMdd", "de_DE").format(DateTime.now())}-messdienerplan.odf")
+                    "${DateFormat("yyyyMMdd", "de_DE").format(DateTime.now())}-messdienerplan.odt")
                 ..click();
             } catch (e) {
               controller.formError(e.toString());
