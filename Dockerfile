@@ -12,6 +12,7 @@ RUN apt-get install --no-install-recommends --no-install-suggests -y jq
 COPY generate_config.sh /
 
 # Das Shell Skript als Entrypoint setzen um sicherzugehen, dass es beim Starten generiert wird
+EXPOSE 80
 ENTRYPOINT [ "/generate_config.sh" ]
 
 # NGINX starten
