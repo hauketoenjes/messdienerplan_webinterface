@@ -14,6 +14,9 @@ class RoleView extends StatelessWidget {
       (routeParameters) async {
         return Get.find<RoleRepository>();
       },
+      matchesSearchQuery: (dataModel, query) {
+        return dataModel.roleName.toLowerCase().contains(query);
+      },
     ),
   );
   @override

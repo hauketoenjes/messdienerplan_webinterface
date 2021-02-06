@@ -44,7 +44,7 @@ class ChangePasswordDialog extends StatelessWidget {
               ),
             ],
           ),
-          scrollable: false,
+          scrollable: true,
           content: Container(
             width: min(MediaQuery.of(context).size.width, 400),
             child: Column(

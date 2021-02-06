@@ -13,9 +13,7 @@ class LocationView extends StatelessWidget {
     DataListViewController<Location>((routeParameters) async {
       return Get.find<LocationRepository>();
     }, matchesSearchQuery: (dataModel, query) {
-      if (query.isEmpty) return true;
-
-      return dataModel.locationName.toLowerCase().contains(query.toLowerCase());
+      return dataModel.locationName.toLowerCase().contains(query);
     }),
   );
 

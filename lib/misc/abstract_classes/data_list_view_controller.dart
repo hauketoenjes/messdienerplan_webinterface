@@ -29,6 +29,9 @@ class DataListViewController<DataModel>
   /// Checkt, ob das DataModel bei einem bestimmten search query angezeigt
   /// werden soll.
   ///
+  /// [query] Der Suchquery wird an Leerzeichen gesplittet und diese Funktion wird
+  /// für jeden Teil aufgerufen.
+  ///
   final bool Function(DataModel dataModel, String query) matchesSearchQuery;
 
   DataListViewController(
@@ -47,7 +50,15 @@ class DataListViewController<DataModel>
     currentQuery = query;
     dataModelList.assignAll(
       backupDataModelList.where(
-        (d) => matchesSearchQuery(d, query),
+        (d) => query
+            .split(' ')
+            .where(
+              (queryPart) => matchesSearchQuery(
+                d,
+                queryPart.toLowerCase(),
+              ),
+            )
+            .isNotEmpty,
       ),
     );
   }

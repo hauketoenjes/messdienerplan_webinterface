@@ -14,6 +14,9 @@ class GroupView extends StatelessWidget {
       (routeParameters) async {
         return Get.find<GroupRepository>();
       },
+      matchesSearchQuery: (dataModel, query) {
+        return dataModel.groupName.toLowerCase().contains(query);
+      },
     ),
   );
   @override

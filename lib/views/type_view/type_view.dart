@@ -15,9 +15,7 @@ class TypeView extends StatelessWidget {
         return Get.find<TypeRepository>();
       },
       matchesSearchQuery: (dataModel, query) {
-        if (query.isEmpty) return true;
-
-        return dataModel.typeName.toLowerCase().contains(query.toLowerCase());
+        return dataModel.typeName.toLowerCase().contains(query);
       },
     ),
   );

@@ -26,7 +26,7 @@ class MassEditView extends DataEditViewWidget {
       },
       getDataModel: (routeParameters, baseRepository) async {
         if (!routeParameters.containsKey('massId')) {
-          return Mass(time: DateTime.now());
+          return Mass(time: DateTime.now(), extra: '', canceled: false);
         }
 
         return await baseRepository

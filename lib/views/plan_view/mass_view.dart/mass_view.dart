@@ -20,23 +20,26 @@ import 'package:messdienerplan_webinterface/widgets/stepper_widgets/stepper/gene
 
 class MassView extends StatelessWidget {
   final controller = Get.put(
-    DataListViewController<Mass>(
-      (routeParameters) async {
-        var planRepository = Get.find<PlanRepository>();
-        await planRepository.getModelList();
+    DataListViewController<Mass>((routeParameters) async {
+      var planRepository = Get.find<PlanRepository>();
+      await planRepository.getModelList();
 
-        return planRepository.masses[int.parse(routeParameters['planId'])];
-      },
-      loadAdditionalData: (controller) async {
-        await controller
-            .storeAdditionalData<Location>(Get.find<LocationRepository>());
-        await controller.storeAdditionalData<Type>(Get.find<TypeRepository>());
-      },
-    ),
+      return planRepository.masses[int.parse(routeParameters['planId'])];
+    }, loadAdditionalData: (controller) async {
+      await controller
+          .storeAdditionalData<Location>(Get.find<LocationRepository>());
+      await controller.storeAdditionalData<Type>(Get.find<TypeRepository>());
+    }, matchesSearchQuery: (dataModel, query) {
+      return dataModel.extra.toLowerCase().contains(query) ||
+          dateTimeFormat
+              .format(dataModel.time.toLocal())
+              .toLowerCase()
+              .contains(query);
+    }),
   );
 
-  final DateFormat dateTimeFormat = DateFormat.MMMMEEEEd().add_y().add_Hm();
-  final DateFormat dateFormat = DateFormat.yMd();
+  static final DateFormat dateTimeFormat =
+      DateFormat.MMMMEEEEd().add_y().add_Hm();
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +111,7 @@ class MassView extends StatelessWidget {
           },
           points: [
             DataCardPoint(
-              content: data.extra,
+              content: data.extra.isEmpty ? 'Keine Informationen' : data.extra,
               icon: Icons.info_outline,
             ),
             DataCardPoint(

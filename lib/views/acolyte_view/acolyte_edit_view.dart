@@ -20,7 +20,7 @@ class AcolyteEditView extends DataEditViewWidget {
       },
       getDataModel: (routeParameters, baseRepository) async {
         if (!routeParameters.containsKey('acolyteId')) {
-          return Acolyte(birthday: DateTime.now());
+          return Acolyte(birthday: DateTime.now(), inactive: false, extra: '');
         }
 
         return await baseRepository

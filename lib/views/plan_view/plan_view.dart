@@ -18,8 +18,15 @@ class PlanView extends StatelessWidget {
       (routeParameters) async {
         return Get.find<PlanRepository>();
       },
+      matchesSearchQuery: (dataModel, query) {
+        return dateFormat.format(dataModel.dateFrom).contains(query) ||
+            dateFormat.format(dataModel.dateTo).contains(query);
+      },
     ),
   );
+
+  static final dateFormat = DateFormat.yMMMd();
+
   @override
   Widget build(BuildContext context) {
     return DataCardListView<Plan>(
@@ -38,7 +45,7 @@ class PlanView extends StatelessWidget {
                 builder: (context) {
                   return CreateNewPlanAssistant();
                 });
-            await controller.refreshDataList();
+            await controller.refreshDataList(forceUpdate: true);
           },
         ),
       ],
@@ -46,7 +53,7 @@ class PlanView extends StatelessWidget {
         return DataCard(
           title: 'Plan #${data.id.toString()}',
           description:
-              '${DateFormat.yMMMd().format(data.dateFrom)} - ${DateFormat.yMMMd().format(data.dateTo)}',
+              '${dateFormat.format(data.dateFrom)} - ${dateFormat.format(data.dateTo)}',
           onTap: () async {
             await Get.toNamed(
                 AppRoutes.PLANS_EDIT.replaceAll(':planId', data.id.toString()));

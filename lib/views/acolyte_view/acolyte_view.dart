@@ -23,17 +23,15 @@ class AcolyteView extends StatelessWidget {
             .storeAdditionalData<Group>(Get.find<GroupRepository>());
       },
       matchesSearchQuery: (dataModel, query) {
-        if (query.isEmpty) return true;
-
-        var lowerQuery = query.toLowerCase();
-
-        return dataModel.firstName.toLowerCase().contains(lowerQuery) ||
-            dataModel.lastName.toLowerCase().contains(lowerQuery);
+        return dataModel.firstName.toLowerCase().contains(query) ||
+            dataModel.lastName.toLowerCase().contains(query) ||
+            dataModel.extra.toLowerCase().contains(query) ||
+            dateFormat.format(dataModel.birthday).contains(query);
       },
     ),
   );
 
-  final dateFormat = DateFormat('dd.MM.yyyy');
+  static final dateFormat = DateFormat('dd.MM.yyyy');
   final now = DateTime.now();
 
   @override
