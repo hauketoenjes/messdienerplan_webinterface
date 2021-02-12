@@ -22,7 +22,7 @@ class MassView extends StatelessWidget {
   final controller = Get.put(
     DataListViewController<Mass>((routeParameters) async {
       var planRepository = Get.find<PlanRepository>();
-      await planRepository.getModelList();
+      await planRepository.getDataList();
 
       return planRepository.masses[int.parse(routeParameters['planId'])];
     }, loadAdditionalData: (controller) async {

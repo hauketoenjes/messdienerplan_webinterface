@@ -1,29 +1,34 @@
 import '../model/models.dart';
 import 'base_repository.dart';
 
-class RoleRepository extends BaseRepository<Role> {
+class RoleRepository extends BaseRepository<Role, int> {
   @override
-  Future<Role> alterData(Role data) async {
-    return await client.patchRole(data.id, data);
+  Future<Role> create(Role data) {
+    return client.postRole(data);
   }
 
   @override
-  Future<void> deleteData(Role data) async {
-    return await client.deleteRole(data.id);
+  Future<void> delete(int id) {
+    return client.deleteRole(id);
   }
 
   @override
-  Future<List<Role>> getModelList() async {
-    return await client.getRoles();
+  Future<Role> get(int id) {
+    return client.getRole(id);
   }
 
   @override
-  Future<Role> insertData(Role data) async {
-    return await client.postRole(data);
-  }
-
-  @override
-  int getDataId(Role data) {
+  int getId(Role data) {
     return data.id;
+  }
+
+  @override
+  Future<List<Role>> getList() {
+    return client.getRoles();
+  }
+
+  @override
+  Future<Role> update(Role data) {
+    return client.patchRole(data.id, data);
   }
 }

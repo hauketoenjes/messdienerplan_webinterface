@@ -455,15 +455,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
-  responsive_grid:
+  responsive_grid_list:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "4346ef331f934ef3366accc7bc00cf29b8a01b6e"
-      url: "https://github.com/hsh-nids/ResponsiveGrid_Flutter"
-    source: git
-    version: "1.2.1+1"
+      name: responsive_grid_list
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   retrofit:
     dependency: "direct main"
     description:

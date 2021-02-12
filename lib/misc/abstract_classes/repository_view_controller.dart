@@ -10,9 +10,9 @@ abstract class RepositoryViewController<DataModel>
   ///
   /// Die BaseRepository, um die Daten zu laden, ändern und löschen.
   ///
-  BaseRepository<DataModel> baseRepository;
+  BaseRepository<DataModel, int> baseRepository;
 
-  final Future<BaseRepository<DataModel>> Function(
+  final Future<BaseRepository<DataModel, int>> Function(
       Map<String, String> routeParameters) getBaseRepository;
 
   ///
@@ -65,7 +65,7 @@ abstract class RepositoryViewController<DataModel>
   /// können
   ///
   Future<void> storeAdditionalData<Data>(
-      BaseRepository<Data> repository) async {
+      BaseRepository<Data, int> repository) async {
     var dataList = await repository.getDataList();
 
     if (_additionalData[Data] == null) {
@@ -75,7 +75,7 @@ abstract class RepositoryViewController<DataModel>
     _additionalData[Data].addAll(
       Map.fromEntries(
         dataList.map(
-          (e) => MapEntry(repository.getDataId(e), e),
+          (e) => MapEntry(repository.getId(e), e),
         ),
       ),
     );

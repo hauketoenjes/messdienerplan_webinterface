@@ -16,7 +16,7 @@ class AcolyteMassView extends StatelessWidget {
     DataListViewController<AcolyteMass>(
       (routeParameters) async {
         var acolyteRepository = Get.find<AcolyteRepository>();
-        await acolyteRepository.getModelList();
+        await acolyteRepository.getDataList();
 
         return acolyteRepository
             .acolyteMasses[int.parse(routeParameters['acolyteId'])];

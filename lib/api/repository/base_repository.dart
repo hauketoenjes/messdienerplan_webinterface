@@ -3,71 +3,97 @@ import 'package:get/get.dart';
 
 import '../messdiener_api.dart';
 
-abstract class BaseRepository<Data> {
+abstract class BaseRepository<Model, IdentifierType> {
+  ///
+  /// API Client
+  ///
+  @protected
   MessdienerApiClient client = Get.find<MessdienerApiClient>();
-  List<Data> _data = [];
 
-  List<Data> toDelete = [];
-  List<Data> toInsert = [];
-  List<Data> toAlter = [];
+  ///
+  /// Cache of [Model]
+  ///
+  final _cache = <Model>[].obs;
 
-  Future<List<Data>> getDataList({bool forceUpdate = false}) async {
-    if (_data.isEmpty || forceUpdate) {
-      _data = await getModelList();
+  ///
+  /// Retuns [Model] from cache if available, otherwise calls [getDataList] with
+  /// [forceUpdate] true and returns [Model].
+  ///
+  Future<Model> getData(IdentifierType id, {bool forceUpdate = false}) async {
+    var data =
+        _cache.singleWhere((data) => getId(data) == id, orElse: () => null);
+
+    if (data != null && !forceUpdate) {
+      return data;
     }
-    return _data;
+
+    await getDataList(forceUpdate: true);
+    return _cache.singleWhere((data) => getId(data) == id);
   }
 
-  Future<Data> getData(int id, {bool forceUpdate = false}) async {
-    await getDataList(forceUpdate: forceUpdate);
-    return _data.singleWhere((data) => getDataId(data) == id);
+  ///
+  /// Returns a list of [Model] from cache.
+  ///
+  /// Gets a fresh list from server when [forceUpdate] is true or the cache is
+  /// empty.
+  ///
+  Future<RxList<Model>> getDataList({bool forceUpdate = false}) async {
+    if (_cache.isEmpty | forceUpdate) {
+      _cache.assignAll(await getList());
+    }
+    return _cache;
   }
 
-  Future<List<Data>> update() async {
-    var actions = <Future>[];
+  ///
+  /// Creates a new [data] object and adds it to cache
+  ///
+  Future<Model> createData(Model data) async {
+    // Create data and receive created data
+    var createdData = await create(data);
 
-    toDelete.forEach((d) {
-      actions.add(deleteData(d));
-    });
-    toDelete.clear();
+    // Add Data to cache, save to do, cause it has to have a unique id
+    _cache.add(createdData);
 
-    toInsert.forEach((d) {
-      actions.add(insertData(d));
-    });
-    toInsert.clear();
-
-    toAlter.forEach((d) {
-      actions.add(alterData(d));
-    });
-    toAlter.clear();
-
-    await Future.wait(actions);
-    return await getDataList(forceUpdate: true);
+    return createdData;
   }
 
-  void insert(Data data) {
-    toInsert.add(data);
+  ///
+  /// Updates the [data] object and the cache
+  ///
+  Future<Model> updateData(Model data) async {
+    // Update data and receive updated data
+    var updatedData = await update(data);
+
+    // Remove the old version of the data and add the updated
+    _cache.removeWhere((element) => getId(element) == getId(data));
+    _cache.add(updatedData);
+
+    return updatedData;
   }
 
-  void alter(Data data) {
-    toAlter.add(data);
-  }
-
-  void delete(Data data) {
-    toDelete.add(data);
+  ///
+  /// Deletes the item with [id] and removes it from cache
+  ///
+  Future<void> deleteData(IdentifierType id) async {
+    // Delete the data and remove it from cache
+    await delete(id);
+    _cache.removeWhere((element) => getId(element) == id);
   }
 
   @protected
-  Future<List<Data>> getModelList();
-
-  int getDataId(Data data);
+  Future<Model> get(IdentifierType id);
 
   @protected
-  Future<void> deleteData(Data data);
+  Future<List<Model>> getList();
 
   @protected
-  Future<Data> insertData(Data data);
+  Future<Model> create(Model data);
 
   @protected
-  Future<Data> alterData(Data data);
+  Future<Model> update(Model data);
+
+  @protected
+  Future<void> delete(IdentifierType id);
+
+  IdentifierType getId(Model data);
 }

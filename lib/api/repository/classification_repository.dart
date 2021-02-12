@@ -1,33 +1,38 @@
 import '../model/models.dart';
 import 'base_repository.dart';
 
-class ClassificationRepository extends BaseRepository<Classification> {
+class ClassificationRepository extends BaseRepository<Classification, int> {
   final int groupId;
 
   ClassificationRepository(this.groupId);
 
   @override
-  Future<Classification> alterData(Classification data) async {
-    return await client.patchClassification(groupId, data.id, data);
+  Future<Classification> create(Classification data) {
+    return client.postClassification(groupId, data);
   }
 
   @override
-  Future<void> deleteData(Classification data) async {
-    return await client.deleteClassification(groupId, data.id);
+  Future<void> delete(int id) {
+    return client.deleteClassification(groupId, id);
   }
 
   @override
-  Future<List<Classification>> getModelList() async {
-    return await client.getClassifications(groupId);
+  Future<Classification> get(int id) {
+    return client.getClassification(groupId, id);
   }
 
   @override
-  Future<Classification> insertData(Classification data) async {
-    return await client.postClassification(groupId, data);
-  }
-
-  @override
-  int getDataId(Classification data) {
+  int getId(Classification data) {
     return data.id;
+  }
+
+  @override
+  Future<List<Classification>> getList() {
+    return client.getClassifications(groupId);
+  }
+
+  @override
+  Future<Classification> update(Classification data) {
+    return client.patchClassification(groupId, data.id, data);
   }
 }

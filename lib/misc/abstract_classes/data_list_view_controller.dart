@@ -35,7 +35,7 @@ class DataListViewController<DataModel>
   final bool Function(DataModel dataModel, String query) matchesSearchQuery;
 
   DataListViewController(
-    Future<BaseRepository<DataModel>> Function(
+    Future<BaseRepository<DataModel, int>> Function(
             Map<String, String> routeParameters)
         getBaseRepository, {
     Future<void> Function(RepositoryViewController<DataModel> controller)
@@ -107,8 +107,7 @@ class DataListViewController<DataModel>
     loading(true);
 
     try {
-      baseRepository.alter(dataModel);
-      await baseRepository.update();
+      await baseRepository.updateData(dataModel);
       await refreshDataList();
       error('');
     } catch (e) {

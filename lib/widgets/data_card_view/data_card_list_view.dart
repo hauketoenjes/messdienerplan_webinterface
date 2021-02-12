@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:messdienerplan_webinterface/misc/abstract_classes/data_list_view_controller.dart';
 import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_action_button.dart';
 import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_skeleton.dart';
-import 'package:responsive_grid/responsive_sliver_grid_list.dart';
+import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 ///
 /// View, um mit einem [DataListViewController] eine Liste von Daten anzuzeigen.
@@ -19,8 +19,8 @@ class DataCardListView<DataModel> extends StatelessWidget {
   final List<PageActionButton> additionalActionButtons;
   final Widget Function(DataModel data) getDataCard;
 
-  final double desiredItemWidth;
-  final double minSpacing;
+  final double minItemWidth;
+  final double spacing;
   final String createNewElementRoute;
 
   DataCardListView({
@@ -31,8 +31,8 @@ class DataCardListView<DataModel> extends StatelessWidget {
     @required this.getDataCard,
     this.description = '',
     this.additionalActionButtons = const [],
-    this.desiredItemWidth = 300,
-    this.minSpacing = 16,
+    this.minItemWidth = 300,
+    this.spacing = 16,
     this.createNewElementRoute,
   }) : super(key: key);
 
@@ -71,11 +71,11 @@ class DataCardListView<DataModel> extends StatelessWidget {
             additionalActionButtons,
         sliverChild: Obx(
           () => ResponsiveSliverGridList(
-            desiredItemWidth: desiredItemWidth,
-            minSpacing: minSpacing,
             children: controller.dataModelList
                 .map((data) => getDataCard(data))
                 .toList(),
+            minItemWidth: minItemWidth,
+            spacing: spacing,
           ),
         ),
       );
