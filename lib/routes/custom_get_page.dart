@@ -11,7 +11,7 @@ class CustomGetPage extends GetPage {
   final String drawerCategoryName;
   final IconData drawerIcon;
 
-  const CustomGetPage({
+  CustomGetPage({
     this.isDrawerItem = false,
     this.drawerTitle = '',
     this.drawerCategoryName = '',

@@ -20,10 +20,10 @@ class DataEditViewController<DataModel>
   /// erstellt.
   ///
   final Future<DataModel> Function(Map<String, String> routeParameters,
-      BaseRepository<DataModel> baseRepository) getDataModel;
+      BaseRepository<DataModel, int> baseRepository) getDataModel;
 
   DataEditViewController(
-    Future<BaseRepository<DataModel>> Function(
+    Future<BaseRepository<DataModel, int>> Function(
             Map<String, String> routeParameters)
         getBaseRepository, {
     this.getDataModel,
@@ -59,8 +59,7 @@ class DataEditViewController<DataModel>
     loading(true);
 
     try {
-      baseRepository.alter(dataModel());
-      await baseRepository.update();
+      await baseRepository.updateData(dataModel());
       formError('');
       loading(false);
       return true;
@@ -80,8 +79,7 @@ class DataEditViewController<DataModel>
     loading(true);
 
     try {
-      baseRepository.delete(dataModel());
-      await baseRepository.update();
+      await baseRepository.deleteData(baseRepository.getId(dataModel()));
       formError('');
       loading(false);
       return true;
@@ -101,8 +99,7 @@ class DataEditViewController<DataModel>
     loading(true);
 
     try {
-      baseRepository.insert(dataModel());
-      await baseRepository.update();
+      await baseRepository.createData(dataModel());
       formError('');
       loading(false);
       return true;

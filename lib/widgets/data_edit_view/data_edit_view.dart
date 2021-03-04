@@ -63,7 +63,6 @@ class DataEditView<DataModel> extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.green,
                                     ),
-                                    child: Text('Erstellen'),
                                     onPressed: controller.loading()
                                         ? null
                                         : () async {
@@ -75,6 +74,7 @@ class DataEditView<DataModel> extends StatelessWidget {
                                               }
                                             }
                                           },
+                                    child: Text('Erstellen'),
                                   ),
                                 ]
                               : [
@@ -82,7 +82,6 @@ class DataEditView<DataModel> extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.green,
                                     ),
-                                    child: Text('Speichern'),
                                     onPressed: controller.loading()
                                         ? null
                                         : () async {
@@ -94,12 +93,12 @@ class DataEditView<DataModel> extends StatelessWidget {
                                               }
                                             }
                                           },
+                                    child: Text('Speichern'),
                                   ),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.red,
                                     ),
-                                    child: Text('Löschen'),
                                     onPressed: controller.loading()
                                         ? null
                                         : () async {
@@ -107,6 +106,7 @@ class DataEditView<DataModel> extends StatelessWidget {
                                               Get.back();
                                             }
                                           },
+                                    child: Text('Löschen'),
                                   ),
                                 ],
                         ],

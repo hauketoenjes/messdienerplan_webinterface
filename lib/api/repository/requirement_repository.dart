@@ -1,33 +1,38 @@
 import '../model/models.dart';
 import 'base_repository.dart';
 
-class RequirementRepository extends BaseRepository<Requirement> {
+class RequirementRepository extends BaseRepository<Requirement, int> {
   final int typeId;
 
   RequirementRepository(this.typeId);
 
   @override
-  Future<Requirement> alterData(Requirement data) async {
-    return await client.patchRequirement(typeId, data.id, data);
+  Future<Requirement> create(Requirement data) {
+    return client.postRequirement(typeId, data);
   }
 
   @override
-  Future<void> deleteData(Requirement data) async {
-    return await client.deleteRequirement(typeId, data.id);
+  Future<void> delete(int id) {
+    return client.deleteRequirement(typeId, id);
   }
 
   @override
-  Future<List<Requirement>> getModelList() async {
-    return await client.getRequirements(typeId);
+  Future<Requirement> get(int id) {
+    return client.getRequirement(typeId, id);
   }
 
   @override
-  Future<Requirement> insertData(Requirement data) async {
-    return await client.postRequirement(typeId, data);
-  }
-
-  @override
-  int getDataId(Requirement data) {
+  int getId(Requirement data) {
     return data.id;
+  }
+
+  @override
+  Future<List<Requirement>> getList() {
+    return client.getRequirements(typeId);
+  }
+
+  @override
+  Future<Requirement> update(Requirement data) {
+    return client.patchRequirement(typeId, data.id, data);
   }
 }

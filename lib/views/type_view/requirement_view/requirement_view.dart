@@ -14,7 +14,7 @@ class RequirementView extends StatelessWidget {
     DataListViewController<Requirement>(
       (routeParameters) async {
         var typeRepository = Get.find<TypeRepository>();
-        await typeRepository.getModelList();
+        await typeRepository.getDataList();
 
         return typeRepository
             .requirements[int.parse(routeParameters['typeId'])];

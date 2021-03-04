@@ -93,16 +93,16 @@ class LoginView extends StatelessWidget {
                     ),
                     SizedBox(height: 30),
                     ElevatedButton(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(fontSize: 16),
-                      ),
                       onPressed: () async {
                         if (await model.loginUser()) {
                           await Navigator.of(context)
                               .pushReplacementNamed(AppRoutes.LOCATIONS);
                         }
                       },
+                      child: Text(
+                        'Login',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ],
                 ),

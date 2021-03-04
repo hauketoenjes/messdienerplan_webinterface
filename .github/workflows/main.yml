@@ -18,13 +18,10 @@ jobs:
         name: Repository checkouten
         uses: actions/checkout@v2
       - 
-        name: Flutter im Beta Channel installieren
+        name: Flutter im Stable Channel installieren
         uses: subosito/flutter-action@v1
         with:
-          channel: beta
-      - 
-        name: Flutter Web aktivieren
-        run: flutter config --enable-web
+          channel: stable
       - 
         name: Projekt für Web bauen (html renderer)
         run: flutter build web --web-renderer html

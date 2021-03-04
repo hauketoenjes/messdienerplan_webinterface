@@ -55,32 +55,32 @@ class RuleEditView extends DataEditViewWidget {
           value: dataModel().dayOfWeek,
           items: [
             DropdownMenuItem<DayOfWeek>(
-              child: Text(DayOfWeek.mon.value),
               value: DayOfWeek.mon,
+              child: Text(DayOfWeek.mon.value),
             ),
             DropdownMenuItem<DayOfWeek>(
-              child: Text(DayOfWeek.tue.value),
               value: DayOfWeek.tue,
+              child: Text(DayOfWeek.tue.value),
             ),
             DropdownMenuItem<DayOfWeek>(
-              child: Text(DayOfWeek.wed.value),
               value: DayOfWeek.wed,
+              child: Text(DayOfWeek.wed.value),
             ),
             DropdownMenuItem<DayOfWeek>(
-              child: Text(DayOfWeek.thu.value),
               value: DayOfWeek.thu,
+              child: Text(DayOfWeek.thu.value),
             ),
             DropdownMenuItem<DayOfWeek>(
-              child: Text(DayOfWeek.fri.value),
               value: DayOfWeek.fri,
+              child: Text(DayOfWeek.fri.value),
             ),
             DropdownMenuItem<DayOfWeek>(
-              child: Text(DayOfWeek.sat.value),
               value: DayOfWeek.sat,
+              child: Text(DayOfWeek.sat.value),
             ),
             DropdownMenuItem<DayOfWeek>(
-              child: Text(DayOfWeek.sun.value),
               value: DayOfWeek.sun,
+              child: Text(DayOfWeek.sun.value),
             ),
           ],
         ),
@@ -99,8 +99,8 @@ class RuleEditView extends DataEditViewWidget {
           items: controller
               .getAdditionalDataList<Location>()
               .map((l) => DropdownMenuItem<int>(
-                    child: Text(l.locationName),
                     value: l.id,
+                    child: Text(l.locationName),
                   ))
               .toList(),
         ),

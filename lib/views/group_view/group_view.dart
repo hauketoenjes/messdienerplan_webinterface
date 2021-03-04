@@ -44,12 +44,12 @@ class GroupView extends StatelessWidget {
           ],
           actions: [
             ElevatedButton(
-              child: Text('Einteilungen bearbeiten'),
               onPressed: () async {
                 await Get.toNamed(AppRoutes.GROUPS_CLASSIFICATIONS
                     .replaceAll(':groupId', data.id.toString()));
                 await controller.refreshDataList();
               },
+              child: Text('Einteilungen bearbeiten'),
             )
           ],
         );

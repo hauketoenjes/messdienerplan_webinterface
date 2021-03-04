@@ -47,11 +47,11 @@ class AcolyteView extends StatelessWidget {
         var title = '${data.firstName} ${data.lastName}';
 
         if (data.extra.isNotEmpty) {
-          title = '${title} (${data.extra})';
+          title = '$title (${data.extra})';
         }
 
         if (data.inactive) {
-          title = '${title} (inaktiv)';
+          title = '$title (inaktiv)';
         }
 
         return DataCard(
@@ -93,7 +93,6 @@ class AcolyteView extends StatelessWidget {
           ],
           actions: [
             ElevatedButton(
-              child: Text('Messen anzeigen'),
               onPressed: () async {
                 await Get.toNamed(
                   AppRoutes.ACOLYTES_MASSES
@@ -101,6 +100,7 @@ class AcolyteView extends StatelessWidget {
                 );
                 await controller.refreshDataList();
               },
+              child: Text('Messen anzeigen'),
             )
           ],
         );

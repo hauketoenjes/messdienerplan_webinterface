@@ -16,7 +16,7 @@ class RuleView extends StatelessWidget {
     DataListViewController<Rule>(
       (routeParameters) async {
         var typeRepository = Get.find<TypeRepository>();
-        await typeRepository.getModelList();
+        await typeRepository.getDataList();
 
         return typeRepository.rules[int.parse(routeParameters['typeId'])];
       },

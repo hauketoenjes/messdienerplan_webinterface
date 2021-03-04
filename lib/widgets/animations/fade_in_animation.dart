@@ -19,7 +19,6 @@ class FadeInAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlayAnimation<double>(
-      child: child,
       duration: duration ?? Duration(milliseconds: 150),
       tween: Tween<double>(
         begin: 0,
@@ -31,6 +30,7 @@ class FadeInAnimation extends StatelessWidget {
           child: child,
         );
       },
+      child: child,
     );
   }
 }

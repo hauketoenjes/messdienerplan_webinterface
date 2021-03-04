@@ -44,20 +44,20 @@ class TypeView extends StatelessWidget {
           ],
           actions: [
             ElevatedButton(
-              child: Text('Regeln bearbeiten'),
               onPressed: () async {
                 await Get.toNamed(AppRoutes.TYPES_RULES
                     .replaceAll(':typeId', data.id.toString()));
                 await controller.refreshDataList();
               },
+              child: Text('Regeln bearbeiten'),
             ),
             ElevatedButton(
-              child: Text('Anforderungen bearbeiten'),
               onPressed: () async {
                 await Get.toNamed(AppRoutes.TYPES_REQUIREMENTS
                     .replaceAll(':typeId', data.id.toString()));
                 await controller.refreshDataList();
               },
+              child: Text('Anforderungen bearbeiten'),
             ),
           ],
         );
