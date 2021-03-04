@@ -97,7 +97,7 @@ class MassView extends StatelessWidget {
       ],
       getDataCard: (data) {
         var title = dateTimeFormat.format(data.time.toLocal());
-        if (data.canceled) title = '${title} (abgesagt)';
+        if (data.canceled) title = '$title (abgesagt)';
 
         return DataCard(
           title: title,
@@ -142,7 +142,6 @@ class MassView extends StatelessWidget {
           ],
           actions: [
             ElevatedButton(
-              child: Text('Messdiener anzeigen'),
               onPressed: () async {
                 await Get.toNamed(
                   AppRoutes.PLANS_MASSES_ACOLYTES
@@ -150,6 +149,7 @@ class MassView extends StatelessWidget {
                       .replaceAll(':massId', data.id.toString()),
                 );
               },
+              child: Text('Messdiener anzeigen'),
             )
           ],
         );

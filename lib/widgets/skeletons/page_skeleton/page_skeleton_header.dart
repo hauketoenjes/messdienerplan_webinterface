@@ -62,16 +62,16 @@ class PageSkeletonHeader extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: 20,
+                  maxWidth: 20,
+                ),
                 child: AnimatedOpacity(
                   duration: Duration(milliseconds: loading ? 0 : 1200),
                   opacity: loading ? 1.0 : 0.0,
                   child: CircularProgressIndicator(
                     strokeWidth: 3.0,
                   ),
-                ),
-                constraints: BoxConstraints(
-                  maxHeight: 20,
-                  maxWidth: 20,
                 ),
               ),
             ),

@@ -12,7 +12,7 @@ class UserRepository extends GetxController {
   var dataLoaded = false.obs;
 
   Future<void> initializeData() async {
-    var client = await Get.find<MessdienerApiClient>();
+    var client = Get.find<MessdienerApiClient>();
     var user = await client.getUser();
 
     username(user.username);

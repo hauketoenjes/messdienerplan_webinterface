@@ -74,8 +74,8 @@ class AcolyteEditView extends DataEditViewWidget {
           items: controller
               .getAdditionalDataList<Group>()
               .map((g) => DropdownMenuItem<int>(
-                    child: Text(g.groupName),
                     value: g.id,
+                    child: Text(g.groupName),
                   ))
               .toList(),
         ),

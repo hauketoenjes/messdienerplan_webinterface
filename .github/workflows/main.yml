@@ -21,10 +21,7 @@ jobs:
         name: Flutter im Beta Channel installieren
         uses: subosito/flutter-action@v1
         with:
-          channel: beta
-      - 
-        name: Flutter Web aktivieren
-        run: flutter config --enable-web
+          channel: stable
       - 
         name: Projekt für Web bauen (html renderer)
         run: flutter build web --web-renderer html

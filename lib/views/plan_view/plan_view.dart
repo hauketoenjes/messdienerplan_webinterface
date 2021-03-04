@@ -76,12 +76,12 @@ class PlanView extends StatelessWidget {
           ],
           actions: [
             ElevatedButton(
-              child: Text('Messen anzeigen'),
               onPressed: () async {
                 await Get.toNamed(AppRoutes.PLANS_MASSES
                     .replaceAll(':planId', data.id.toString()));
                 await controller.refreshDataList();
               },
+              child: Text('Messen anzeigen'),
             ),
           ],
         );

@@ -21,11 +21,11 @@ class ClickablePopupMenuItem {
 
   PopupMenuItem<int> popupMenuEntry(int value) {
     return PopupMenuItem<int>(
+      value: value,
       child: ListTile(
         title: Text(title),
         leading: icon,
       ),
-      value: value,
     );
   }
 }

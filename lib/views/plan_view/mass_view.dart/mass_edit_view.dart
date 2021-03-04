@@ -80,8 +80,8 @@ class MassEditView extends DataEditViewWidget {
           items: controller
               .getAdditionalDataList<Location>()
               .map((l) => DropdownMenuItem<int>(
-                    child: Text(l.locationName),
                     value: l.id,
+                    child: Text(l.locationName),
                   ))
               .toList(),
         ),
@@ -93,8 +93,8 @@ class MassEditView extends DataEditViewWidget {
           items: controller
               .getAdditionalDataList<Type>()
               .map((t) => DropdownMenuItem<int>(
-                    child: Text(t.typeName),
                     value: t.id,
+                    child: Text(t.typeName),
                   ))
               .toList(),
         ),

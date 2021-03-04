@@ -32,8 +32,8 @@ class CustomDropdownFormField<DataType> extends StatelessWidget {
         items: <DropdownMenuItem<DataType>>[
           if (nullValueTitle != null)
             DropdownMenuItem(
-              child: Text(nullValueTitle),
               value: null,
+              child: Text(nullValueTitle),
             ),
           ...items,
         ],

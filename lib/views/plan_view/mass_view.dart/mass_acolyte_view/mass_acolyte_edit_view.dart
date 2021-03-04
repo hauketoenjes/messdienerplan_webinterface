@@ -61,8 +61,8 @@ class MassAcolyteEditView extends DataEditViewWidget {
                 ? '${a.firstName} ${a.lastName} (${a.extra})'
                 : '${a.firstName} ${a.lastName}';
             return DropdownMenuItem<int>(
-              child: Text(name),
               value: a.id,
+              child: Text(name),
             );
           }).toList(),
         ),
@@ -74,8 +74,8 @@ class MassAcolyteEditView extends DataEditViewWidget {
           items: controller
               .getAdditionalDataList<Role>()
               .map((t) => DropdownMenuItem<int>(
-                    child: Text(t.roleName),
                     value: t.id,
+                    child: Text(t.roleName),
                   ))
               .toList(),
         ),

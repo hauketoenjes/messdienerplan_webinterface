@@ -151,25 +151,25 @@ class HeaderBar extends StatelessWidget {
               itemBuilder: (BuildContext context) {
                 return [
                   PopupMenuItem(
+                    value: 0,
                     child: ListTile(
                       title: Text('Ausloggen'),
                       leading: Icon(Icons.logout),
                     ),
-                    value: 0,
                   ),
                   PopupMenuItem(
+                    value: 1,
                     child: ListTile(
                       title: Text('Passwort ändern'),
                       leading: Icon(Icons.lock_outlined),
                     ),
-                    value: 1,
                   ),
                   PopupMenuItem(
+                    value: 2,
                     child: ListTile(
                       title: Text('Thema wechseln'),
                       leading: Icon(Icons.brightness_3),
                     ),
-                    value: 2,
                   ),
                 ];
               },

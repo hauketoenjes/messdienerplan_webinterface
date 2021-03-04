@@ -58,8 +58,8 @@ class RequirementEditView extends DataEditViewWidget {
           items: controller
               .getAdditionalDataList<Role>()
               .map((l) => DropdownMenuItem<int>(
-                    child: Text(l.roleName),
                     value: l.id,
+                    child: Text(l.roleName),
                   ))
               .toList(),
         ),
