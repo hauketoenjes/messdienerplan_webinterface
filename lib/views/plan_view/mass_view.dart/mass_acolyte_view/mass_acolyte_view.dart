@@ -40,10 +40,10 @@ class MassAcolyteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DataCardListView<MassAcolyte>(
       controller: controller,
-      title: 'Messdiener zur Messe',
+      title: 'Messdiener:innen zur Messe',
       description:
-          'Hier werden die Messdiener zu einer bestimmten Messe angezeigt und können bearbeitet werden.',
-      noDataText: 'Keine Messdiener eingeteilt',
+          'Hier werden die Messdiener:innen zu einer bestimmten Messe angezeigt und können bearbeitet werden.',
+      noDataText: 'Keine Messdiener:innen eingeteilt',
       createNewElementRoute: AppRoutes.PLANS_MASSES_ACOLYTES_NEW
           .replaceAll(':planId', Get.parameters['planId'])
           .replaceAll(':massId', Get.parameters['massId']),
@@ -51,7 +51,7 @@ class MassAcolyteView extends StatelessWidget {
         var acolyte = controller.getAdditionalDataById<Acolyte>(data.acolyte);
         var role = data.role != null
             ? controller.getAdditionalDataById<Role>(data.role).roleName
-            : 'Messdiener';
+            : 'Messdiener:in';
 
         return DataCard(
           title: '${acolyte.firstName} ${acolyte.lastName}',

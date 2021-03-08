@@ -38,10 +38,10 @@ class AcolyteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DataCardListView<Acolyte>(
       controller: controller,
-      title: 'Messdiener',
+      title: 'Messdiener:innen',
       description:
-          'Hier können Messdiener erstellt und bearbeitet werden. Messdiener können auf "Inaktiv" gesetzt werden, damit sie beim Plan generien nicht mehr eingeteilt werden.',
-      noDataText: 'Keine Messdiener vorhanden',
+          'Hier können Messdiener:innen erstellt und bearbeitet werden. Messdiener:innen können auf "Inaktiv" gesetzt werden, damit sie beim Plan generien nicht mehr eingeteilt werden.',
+      noDataText: 'Keine Messdiener:innen vorhanden',
       createNewElementRoute: AppRoutes.ACOLYTES_NEW,
       getDataCard: (data) {
         var title = '${data.firstName} ${data.lastName}';

@@ -21,26 +21,18 @@ class AppTheme {
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            EdgeInsets.all(16),
-          ),
-          shape: MaterialStateProperty.all<OutlinedBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            EdgeInsets.all(16),
-          ),
-          shape: MaterialStateProperty.all<OutlinedBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.all(16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ),
@@ -80,9 +72,9 @@ class AppTheme {
 
   static const _darkColorScheme = ColorScheme(
     primary: Colors.indigo,
-    primaryVariant: Colors.indigo,
+    primaryVariant: Colors.indigoAccent,
     secondary: Colors.indigo,
-    secondaryVariant: Colors.indigo,
+    secondaryVariant: Colors.indigoAccent,
     surface: Color(0xff121212),
     background: Color(0xff121212),
     error: Color(0xffcf6679),

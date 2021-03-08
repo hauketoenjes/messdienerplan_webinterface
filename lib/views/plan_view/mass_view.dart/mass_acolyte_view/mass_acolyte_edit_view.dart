@@ -45,15 +45,15 @@ class MassAcolyteEditView extends DataEditViewWidget {
   Widget build(BuildContext context) {
     return DataEditView<MassAcolyte>(
       controller: controller,
-      newDataTitle: 'Neuen Messdiener hinzufügen',
-      editDataTitle: 'Messdiener bearbeiten',
-      editDataDescription: 'Hier kann ein Messdiener bearbeitet werden',
-      newDataDescription: 'Hier kann ein neuer Messdiener hinzugefügt werden',
-      noDataText: 'Messdiener konnte nicht geladen oder erstellt werden',
+      newDataTitle: 'Messdiener:in hinzufügen',
+      editDataTitle: 'Messdiener:in bearbeiten',
+      editDataDescription: 'Hier kann ein:e Messdiener:in bearbeitet werden',
+      newDataDescription: 'Hier kann ein:e Messdiener:in hinzugefügt werden',
+      noDataText: 'Messdiener:in konnte nicht geladen oder erstellt werden',
       createNewEntry: createNewEntry,
       formChildren: (dataModel) => [
         CustomDropdownFormField<int>(
-          title: 'Messdiener',
+          title: 'Messdiener:in',
           onChanged: (value) => dataModel().acolyte = value,
           value: dataModel().acolyte,
           items: controller.getAdditionalDataList<Acolyte>().map((a) {

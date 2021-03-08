@@ -43,9 +43,9 @@ class AcolyteMassView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DataCardListView<AcolyteMass>(
       controller: controller,
-      title: 'Messen von Messdiener',
+      title: 'Messen von Messdiener:in',
       description:
-          'Hier werden die Messen von einem bestimmten Messdiener angezeigt.',
+          'Hier werden Messen zu einem:einer bestimmten Messdiener:in angezeigt',
       noDataText: 'Keine Messen',
       getDataCard: (data) {
         var role = controller.getAdditionalDataById<Role>(data.role);

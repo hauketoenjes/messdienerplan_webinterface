@@ -80,7 +80,7 @@ class GeneratePlanAssistant extends StatelessWidget {
                         id: 2,
                         title: 'Plan wird generiert',
                         subtitle:
-                            'Die Messdiener werden zufällig den Messen zugeordnet.',
+                            'Die Messdiener:innen werden zufällig den Messen zugeordnet.',
                         content: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CircularProgressIndicator(),

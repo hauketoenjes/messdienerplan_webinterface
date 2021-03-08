@@ -37,11 +37,11 @@ class AcolyteEditView extends DataEditViewWidget {
   Widget build(BuildContext context) {
     return DataEditView<Acolyte>(
       controller: controller,
-      newDataTitle: 'Neuen Messdiener erstellen',
-      editDataTitle: 'Messdiener bearbeiten',
-      editDataDescription: 'Hier kann ein Messdiener bearbeitet werden',
-      newDataDescription: 'Hier kann ein neuer Messdiener erstellt werden',
-      noDataText: 'Messdiener konnte nicht geladen oder erstellt werden',
+      newDataTitle: 'Messdiener:in erstellen',
+      editDataTitle: 'Messdiener:in bearbeiten',
+      editDataDescription: 'Hier kann ein:e Messdiener:in bearbeitet werden',
+      newDataDescription: 'Hier kann ein:e neuer Messdiener:in erstellt werden',
+      noDataText: 'Messdiener:in konnte nicht geladen oder erstellt werden',
       createNewEntry: createNewEntry,
       formChildren: (dataModel) => [
         CustomTextFormField(

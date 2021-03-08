@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:messdienerplan_webinterface/widgets/form_fields/custom_text_form_field.dart';
 
@@ -33,7 +34,7 @@ class ChangePasswordDialog extends StatelessWidget {
               // Illustration und Titel anzeigen
               Container(
                 constraints: BoxConstraints(maxHeight: 200, maxWidth: 400),
-                child: Image.network('assets/undraw_authentication.svg'),
+                child: SvgPicture.network('assets/undraw_authentication.svg'),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),

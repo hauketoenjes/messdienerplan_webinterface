@@ -71,11 +71,11 @@ class DataCardListView<DataModel> extends StatelessWidget {
             additionalActionButtons,
         sliverChild: Obx(
           () => ResponsiveSliverGridList(
+            minItemWidth: minItemWidth,
+            spacing: spacing,
             children: controller.dataModelList
                 .map((data) => getDataCard(data))
                 .toList(),
-            minItemWidth: minItemWidth,
-            spacing: spacing,
           ),
         ),
       );

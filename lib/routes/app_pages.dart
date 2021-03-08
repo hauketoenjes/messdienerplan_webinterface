@@ -92,7 +92,7 @@ class AppPages {
     ),
     CustomGetPage(
       isDrawerItem: true,
-      drawerTitle: 'Messdiener',
+      drawerTitle: 'Messdiener:innen',
       drawerCategoryName: DrawerCategories.PLAN_DATA,
       drawerIcon: Icons.person_outlined,
       name: AppRoutes.ACOLYTES,
