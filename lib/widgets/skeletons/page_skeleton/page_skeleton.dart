@@ -72,7 +72,9 @@ class PageSkeleton extends StatelessWidget {
   final bool showFilter;
   final String initialSearchValue;
 
-  const PageSkeleton({
+  final _scrollController = ScrollController();
+
+  PageSkeleton({
     Key key,
     @required this.title,
     @required this.description,
@@ -241,13 +243,20 @@ class PageSkeleton extends StatelessWidget {
     }
 
     return Expanded(
+      // Show Scrollbar on the edge of screen, not on the edge of Scrollview
       child: Scrollbar(
+        controller: _scrollController,
         thickness: 8,
         radius: Radius.circular(8),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: CustomScrollView(
-            slivers: slivers,
+          child: ScrollConfiguration(
+            behavior:
+                ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            child: CustomScrollView(
+              controller: _scrollController,
+              slivers: slivers,
+            ),
           ),
         ),
       ),

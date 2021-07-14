@@ -44,6 +44,8 @@ class AcolyteRepository extends BaseRepository<Acolyte, int> {
         }
       },
     );
+    list.sort((a1, a2) => '${a1.firstName} ${a1.lastName}'
+        .compareTo('${a2.firstName} ${a2.lastName}'));
     return list;
   }
 

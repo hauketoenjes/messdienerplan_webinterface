@@ -40,7 +40,7 @@ class AcolyteView extends StatelessWidget {
       controller: controller,
       title: 'Messdiener:innen',
       description:
-          'Hier können Messdiener:innen erstellt und bearbeitet werden. Messdiener:innen können auf "Inaktiv" gesetzt werden, damit sie beim Plan generien nicht mehr eingeteilt werden.',
+          'Hier können Messdiener:innen erstellt und bearbeitet werden. Messdiener:innen können auf "Inaktiv" gesetzt werden, damit sie beim Plan generieren nicht mehr eingeteilt werden.',
       noDataText: 'Keine Messdiener:innen vorhanden',
       createNewElementRoute: AppRoutes.ACOLYTES_NEW,
       getDataCard: (data) {

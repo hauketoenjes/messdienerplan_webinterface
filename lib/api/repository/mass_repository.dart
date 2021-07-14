@@ -48,6 +48,7 @@ class MassRepository extends BaseRepository<Mass, int> {
         }
       },
     );
+    list.sort((m1, m2) => m1.time.compareTo(m2.time));
     return list;
   }
 
