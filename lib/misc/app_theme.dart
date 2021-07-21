@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+///
+/// Definiert das alle Farben und Themes der App.
+///
+ThemeData getAppTheme(Brightness brightness) {
+  final theme = brightness == Brightness.light ? _lightTheme : _darkTheme;
+
+  return theme.copyWith(
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+    cardTheme: CardTheme(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    ),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.all<Color>(theme.colorScheme.secondary),
+    ),
+    popupMenuTheme: PopupMenuThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+  );
+}
+
+final _lightTheme = ThemeData.from(
+  colorScheme: _lightColorScheme,
+  textTheme: _lightTextTheme,
+);
+final _darkTheme = ThemeData.from(
+  colorScheme: _darkColorScheme,
+  textTheme: _darkTextTheme,
+);
+
+final _darkTextTheme = GoogleFonts.montserratTextTheme().apply(
+  bodyColor: Colors.white,
+  displayColor: Colors.white,
+);
+final _lightTextTheme = GoogleFonts.montserratTextTheme().apply(
+  bodyColor: Colors.black,
+  displayColor: Colors.black,
+);
+
+const _darkColorScheme = ColorScheme(
+  primary: Colors.indigo,
+  primaryVariant: Colors.indigoAccent,
+  secondary: Colors.indigo,
+  secondaryVariant: Colors.indigoAccent,
+  surface: Color(0xff121212),
+  background: Color(0xff121212),
+  error: Color(0xffcf6679),
+  onPrimary: Colors.white,
+  onSecondary: Colors.white,
+  onSurface: Colors.white,
+  onBackground: Colors.white,
+  onError: Colors.black,
+  brightness: Brightness.dark,
+);
+
+const _lightColorScheme = ColorScheme(
+  primary: Colors.indigo,
+  primaryVariant: Colors.indigo,
+  secondary: Colors.indigo,
+  secondaryVariant: Colors.indigo,
+  surface: Colors.white,
+  background: Color(0xFFF5F6F8),
+  error: Color(0xffb00020),
+  onPrimary: Colors.white,
+  onSecondary: Colors.white,
+  onSurface: Colors.black,
+  onBackground: Colors.black,
+  onError: Colors.white,
+  brightness: Brightness.light,
+);
