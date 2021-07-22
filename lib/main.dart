@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:messdienerplan_webinterface/api/messdienerplan_api.dart';
+import 'package:messdienerplan_webinterface/api/repository/acolyte_repository.dart';
+import 'package:messdienerplan_webinterface/api/repository/group_repository.dart';
 import 'package:messdienerplan_webinterface/api/repository/location_repository.dart';
+import 'package:messdienerplan_webinterface/api/repository/role_repository.dart';
 import 'package:messdienerplan_webinterface/misc/app_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:messdienerplan_webinterface/misc/navigation/app_routes.dart';
@@ -10,6 +14,7 @@ import 'package:vrouter/vrouter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Intl.defaultLocale = 'de';
 
   await initialize();
 
@@ -19,10 +24,7 @@ Future<void> main() async {
       debugShowCheckedModeBanner: false,
       theme: getAppTheme(Brightness.light),
       darkTheme: getAppTheme(Brightness.dark),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
         Locale('de'),
       ],
@@ -54,4 +56,7 @@ Future<void> initialize() async {
 
   KiwiContainer().registerSingleton((container) => client);
   KiwiContainer().registerSingleton((container) => LocationRepository());
+  KiwiContainer().registerSingleton((container) => AcolyteRepository());
+  KiwiContainer().registerSingleton((container) => GroupRepository());
+  KiwiContainer().registerSingleton((container) => RoleRepository());
 }

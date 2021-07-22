@@ -2,42 +2,65 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:messdienerplan_webinterface/api/repository/mixins/delete.dart';
 import 'package:messdienerplan_webinterface/api/repository/mixins/read_all.dart';
-import 'package:messdienerplan_webinterface/views/location_view/data_source.dart';
 import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_action_button.dart';
 import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_skeleton.dart';
 import 'package:provider/provider.dart';
 import 'package:vrouter/vrouter.dart';
 
+import 'data_source.dart';
+
 class DataTableView<T> extends StatelessWidget {
   final String title;
   final String description;
-  final String addRoute;
-  final List<DataColumn> columns;
+  final String? addRoute;
+  final List<DataColumn> Function(
+    void Function(
+      int sortColumnIndex,
+      bool sortAscending,
+      Comparable Function(T item) getComparable,
+    ),
+  ) columns;
   final ReadAll<T> readAllRepository;
+  final void Function(void Function<U>(ReadAll<U> readAll) register)?
+      optionalReadAllRepositories;
   final Delete<T>? deleteRepository;
-  final List<DataCell> Function(T item) getDataCells;
+  final String? deleteDialogTitle;
+  final String? deleteDialogContent;
+  final String? searchPrompt;
+  final List<String> Function(T item)? searchableValues;
+  final List<DataCell> Function(
+      T item, List<U> Function<U>() resolveOptionalItems) dataCells;
   final List<IconButton> Function(T item)? additionalActions;
 
   const DataTableView({
     Key? key,
     required this.title,
     required this.description,
-    required this.addRoute,
     required this.columns,
     required this.readAllRepository,
-    required this.getDataCells,
+    required this.dataCells,
+    this.addRoute,
     this.deleteRepository,
+    this.deleteDialogTitle,
+    this.deleteDialogContent,
+    this.searchPrompt,
+    this.searchableValues,
     this.additionalActions,
+    this.optionalReadAllRepositories,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<DataSource<T>>(
       create: (context) => DataSource<T>(
+        context: context,
         readAllRepository: readAllRepository,
         deleteRepository: deleteRepository,
+        deleteDialogTitle: deleteDialogTitle,
+        deleteDialogContent: deleteDialogContent,
         additionalActions: additionalActions,
-        getDataCells: getDataCells,
+        optionalReadAllRepositories: optionalReadAllRepositories,
+        dataCells: dataCells,
       ),
       builder: (context, child) {
         return Consumer<DataSource<T>>(
@@ -78,32 +101,39 @@ class DataTableView<T> extends StatelessWidget {
                     PaginatedDataTable(
                       sortAscending: source.sortAscending,
                       sortColumnIndex: source.sortColumnIndex,
+                      rowsPerPage: source.rowsPerPage,
                       source: source,
-                      header: const TextField(
-                        textAlignVertical: TextAlignVertical.center,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: Icon(
-                            Icons.search_rounded,
-                          ),
-                          hintText: 'Suche nach Orten...',
-                        ),
-                      ),
+                      header: searchPrompt != null
+                          ? TextField(
+                              textAlignVertical: TextAlignVertical.center,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                prefixIcon: const Icon(
+                                  Icons.search_rounded,
+                                ),
+                                hintText: '$searchPrompt ...',
+                              ),
+                              onChanged: (value) {
+                                source.search(value, searchableValues!);
+                              },
+                            )
+                          : Text(title),
                       actions: [
-                        TextButton.icon(
-                          onPressed: () {
-                            context.vRouter.to(addRoute);
-                          },
-                          icon: const Icon(Icons.add_rounded),
-                          label: const Text('Hinzufügen'),
-                        ),
+                        if (addRoute != null)
+                          TextButton.icon(
+                            onPressed: () {
+                              context.vRouter.to(addRoute!);
+                            },
+                            icon: const Icon(Icons.add_rounded),
+                            label: const Text('Hinzufügen'),
+                          ),
                       ],
                       onRowsPerPageChanged: (value) {
                         if (value == null) return;
                         source.rowsPerPage = value;
                       },
                       columns: [
-                        ...columns,
+                        ...columns(source.sort),
                         if (deleteRepository != null ||
                             additionalActions != null)
                           const DataColumn(label: Text('Aktionen'))

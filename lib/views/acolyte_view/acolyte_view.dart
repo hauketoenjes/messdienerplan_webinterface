@@ -1,68 +1,76 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-import 'package:messdienerplan_webinterface/api/repository/location_repository.dart';
-import 'package:messdienerplan_webinterface/views/acolyte_view/acolyte_data_source.dart';
-import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_action_button.dart';
-import 'package:messdienerplan_webinterface/widgets/skeletons/page_skeleton/page_skeleton.dart';
+import 'package:intl/intl.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:messdienerplan_webinterface/api/model/models.dart';
+import 'package:messdienerplan_webinterface/api/repository/acolyte_repository.dart';
+import 'package:messdienerplan_webinterface/api/repository/group_repository.dart';
+import 'package:messdienerplan_webinterface/widgets/abstract_views/data_table_view/data_table_view.dart';
+import 'package:messdienerplan_webinterface/misc/extensions/date_format_extensions.dart';
 
-class AcolyteView extends StatefulWidget {
-  @override
-  _AcolyteViewState createState() => _AcolyteViewState();
-}
-
-class _AcolyteViewState extends State<AcolyteView> {
-  int rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
-  final source = AcolyteDataSource();
+class AcolyteView extends StatelessWidget {
+  final acolyteRepository = KiwiContainer().resolve<AcolyteRepository>();
+  final groupRepository = KiwiContainer().resolve<GroupRepository>();
 
   @override
   Widget build(BuildContext context) {
-    return PageSkeleton(
+    final DateFormat dateFormat = DateFormats.yyyyMMdd();
+
+    return DataTableView<Acolyte>(
       title: 'Messdiener:innen',
       description:
-          'Hier können Messdiener:innen erstellt und bearbeitet werden. Messdiener:innen können auf "Inaktiv" gesetzt werden, damit sie beim Generieren des Plans nicht eingeteilt werden.',
-      actionButtons: [
-        PageActionButton(
-          icon: const Icon(Icons.download_rounded),
-          label: 'Download',
-          onPressed: () async {
-            final repository = LocationRepository();
-            final logger = Logger();
-
-            repository.readAll().then((value) => logger.i(value));
-          },
+          'Hier können Messdiener:innen erstellt und bearbeitet werden',
+      readAllRepository: acolyteRepository,
+      deleteRepository: acolyteRepository,
+      deleteDialogTitle: 'Messdiener:in löschen?',
+      deleteDialogContent: 'Messdiener:in wird endgültig gelöscht.',
+      searchPrompt: 'Suche nach Messdiener:in',
+      optionalReadAllRepositories: (register) {
+        register<Group>(groupRepository);
+      },
+      searchableValues: (item) => [
+        item.firstName,
+        item.lastName,
+        item.extra,
+      ],
+      columns: (sort) => [
+        DataColumn(
+          label: const Text('Vorname'),
+          onSort: (index, asc) => sort(index, asc, (item) => item.firstName),
+        ),
+        DataColumn(
+          label: const Text('Nachname'),
+          onSort: (index, asc) => sort(index, asc, (item) => item.lastName),
+        ),
+        DataColumn(
+          label: const Text('Extrainformation'),
+          onSort: (index, asc) => sort(index, asc, (item) => item.extra),
+        ),
+        DataColumn(
+          label: const Text('Geburtstag'),
+          onSort: (index, asc) => sort(index, asc, (item) => item.birthday),
+        ),
+        const DataColumn(label: Text('Status')),
+        DataColumn(
+          label: const Text('Gruppe'),
+          onSort: (index, asc) => sort(index, asc, (item) => item.group ?? 0),
         ),
       ],
-      child: PaginatedDataTable(
-        onRowsPerPageChanged: (value) {
-          if (value == null) return;
-          setState(() {
-            rowsPerPage = value;
-          });
-        },
-        rowsPerPage: rowsPerPage,
-        header: const Text("Messdiener:innen"),
-        actions: [
-          Container(
-            constraints: const BoxConstraints(maxWidth: 250),
-            child: const TextField(
-              decoration: InputDecoration(
-                isDense: true,
-                prefixIcon: Icon(Icons.search_rounded),
-                hintText: 'Suche',
-              ),
-            ),
-          ),
-        ],
-        columns: const [
-          DataColumn(label: Text('Vorname')),
-          DataColumn(label: Text('Nachname')),
-          DataColumn(label: Text('Geburtstag')),
-          DataColumn(label: Text('Gruppe')),
-          DataColumn(label: Text('Status')),
-        ],
-        source: source,
-      ),
+      dataCells: (item, resolve) => [
+        DataCell(Text(item.firstName)),
+        DataCell(Text(item.lastName)),
+        DataCell(Text(item.extra.isEmpty ? '-' : item.extra)),
+        DataCell(Text(dateFormat.format(item.birthday))),
+        DataCell(Text(item.inactive ? 'Inaktiv' : 'Aktiv')),
+        DataCell(Text(
+          resolve<Group>()
+              .singleWhere(
+                (e) => e.id == item.group,
+                orElse: () => Group(groupName: '-', classifications: []),
+              )
+              .groupName,
+        )),
+      ],
     );
   }
 }
