@@ -14,7 +14,11 @@ class GroupView extends StatelessWidget {
     return DataTableView<Group>(
       title: 'Gruppen',
       description: 'Hier können Gruppen erstellt und bearbeitet werden',
-      addRoute: groupsAdd,
+      createRoute: groupsCreate,
+      getUpdateRoute: (item) => groupsUpdate.replaceAll(
+        ':groupId',
+        item.id.toString(),
+      ),
       readAllRepository: groupRepository,
       deleteRepository: groupRepository,
       deleteDialogTitle: 'Gruppe löschen?',
@@ -28,9 +32,23 @@ class GroupView extends StatelessWidget {
           label: const Text('Name'),
           onSort: (index, asc) => sort(index, asc, (item) => item.groupName),
         ),
+        DataColumn(
+          label: const Text('Einteilungen'),
+          onSort: (index, asc) =>
+              sort(index, asc, (item) => item.classifications.length),
+        ),
       ],
       dataCells: (item, _) => [
         DataCell(Text(item.groupName)),
+        DataCell(
+          Text(
+            item.classifications.isEmpty
+                ? 'Keine Einteilungen'
+                : item.classifications.length == 1
+                    ? '1 Einteilung'
+                    : '${item.classifications.length} Einteilungen',
+          ),
+        ),
       ],
     );
   }

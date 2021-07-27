@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:messdienerplan_webinterface/api/repository/mixins/delete.dart';
 import 'package:messdienerplan_webinterface/api/repository/mixins/read_all.dart';
 import 'package:messdienerplan_webinterface/widgets/dialogs/question_dialog.dart';
+import 'package:vrouter/vrouter.dart';
 
 class DataSource<T> extends DataTableSource {
   final BuildContext context;
@@ -12,6 +13,7 @@ class DataSource<T> extends DataTableSource {
   final List<IconButton> Function(T item)? additionalActions;
   final void Function(void Function<U>(ReadAll<U> readAll) register)?
       optionalReadAllRepositories;
+  final String Function(T item)? getUpdateRoute;
 
   final String? deleteDialogTitle;
   final String? deleteDialogContent;
@@ -36,6 +38,7 @@ class DataSource<T> extends DataTableSource {
     required this.context,
     required this.readAllRepository,
     required this.dataCells,
+    this.getUpdateRoute,
     this.deleteRepository,
     this.deleteDialogTitle,
     this.deleteDialogContent,
@@ -157,6 +160,13 @@ class DataSource<T> extends DataTableSource {
               alignment: MainAxisAlignment.start,
               children: [
                 if (additionalActions != null) ...additionalActions!(item),
+                if (getUpdateRoute != null)
+                  IconButton(
+                    onPressed: () async {
+                      context.vRouter.to(getUpdateRoute!(item));
+                    },
+                    icon: const Icon(Icons.edit_rounded),
+                  ),
                 if (deleteRepository != null)
                   IconButton(
                     onPressed: () async {

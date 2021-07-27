@@ -1,10 +1,10 @@
 import 'package:messdienerplan_webinterface/misc/navigation/vdialog_page.dart';
 import 'package:messdienerplan_webinterface/views/acolyte_view/acolyte_view.dart';
-import 'package:messdienerplan_webinterface/views/group_view/group_add_view.dart';
+import 'package:messdienerplan_webinterface/views/group_view/group_update_create_view.dart';
 import 'package:messdienerplan_webinterface/views/group_view/group_view.dart';
-import 'package:messdienerplan_webinterface/views/location_view/location_add_view.dart';
+import 'package:messdienerplan_webinterface/views/location_view/location_update_create_view.dart';
 import 'package:messdienerplan_webinterface/views/location_view/location_view.dart';
-import 'package:messdienerplan_webinterface/views/role_view/role_add_view.dart';
+import 'package:messdienerplan_webinterface/views/role_view/role_update_create_view.dart';
 import 'package:messdienerplan_webinterface/views/role_view/role_view.dart';
 import 'package:messdienerplan_webinterface/widgets/skeletons/base_skeleton/base_skeleton.dart';
 import 'package:vrouter/vrouter.dart';
@@ -14,13 +14,16 @@ const plans = '/plans';
 const acolytes = '/acolytes';
 
 const locations = '/locations';
-const locationsAdd = '/locations/add';
+const locationsCreate = '/locations/add';
+const locationsUpdate = '/locations/:locationId';
 
 const roles = '/roles';
-const rolesAdd = '/roles/add';
+const rolesCreate = '/roles/add';
+const rolesUpdate = '/roles/:roleId';
 
 const groups = '/groups';
-const groupsAdd = '/groups/add';
+const groupsCreate = '/groups/add';
+const groupsUpdate = '/groups/:groupId';
 
 const types = '/types';
 
@@ -44,9 +47,13 @@ final routes = <VRouteElement>[
     ),
     stackedRoutes: [
       VDialogPage(
-        path: locationsAdd,
-        widget: LocationAddView(),
-      )
+        path: locationsCreate,
+        widget: LocationUpdateCreateView(),
+      ),
+      VDialogPage(
+        path: locationsUpdate,
+        widget: LocationUpdateCreateView(),
+      ),
     ],
   ),
   VWidget(
@@ -56,9 +63,13 @@ final routes = <VRouteElement>[
     ),
     stackedRoutes: [
       VDialogPage(
-        path: rolesAdd,
-        widget: RoleAddView(),
-      )
+        path: rolesCreate,
+        widget: RoleUpdateCreateView(),
+      ),
+      VDialogPage(
+        path: rolesUpdate,
+        widget: RoleUpdateCreateView(),
+      ),
     ],
   ),
   VWidget(
@@ -68,9 +79,13 @@ final routes = <VRouteElement>[
     ),
     stackedRoutes: [
       VDialogPage(
-        path: groupsAdd,
-        widget: GroupAddView(),
-      )
+        path: groupsCreate,
+        widget: GroupUpdateCreateView(),
+      ),
+      VDialogPage(
+        path: groupsUpdate,
+        widget: GroupUpdateCreateView(),
+      ),
     ],
   ),
   VWidget(

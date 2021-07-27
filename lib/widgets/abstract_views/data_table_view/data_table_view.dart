@@ -12,7 +12,8 @@ import 'data_source.dart';
 class DataTableView<T> extends StatelessWidget {
   final String title;
   final String description;
-  final String? addRoute;
+  final String? createRoute;
+  final String Function(T item)? getUpdateRoute;
   final List<DataColumn> Function(
     void Function(
       int sortColumnIndex,
@@ -39,7 +40,8 @@ class DataTableView<T> extends StatelessWidget {
     required this.columns,
     required this.readAllRepository,
     required this.dataCells,
-    this.addRoute,
+    this.createRoute,
+    this.getUpdateRoute,
     this.deleteRepository,
     this.deleteDialogTitle,
     this.deleteDialogContent,
@@ -58,6 +60,7 @@ class DataTableView<T> extends StatelessWidget {
         deleteRepository: deleteRepository,
         deleteDialogTitle: deleteDialogTitle,
         deleteDialogContent: deleteDialogContent,
+        getUpdateRoute: getUpdateRoute,
         additionalActions: additionalActions,
         optionalReadAllRepositories: optionalReadAllRepositories,
         dataCells: dataCells,
@@ -66,10 +69,10 @@ class DataTableView<T> extends StatelessWidget {
         return Consumer<DataSource<T>>(
           builder: (context, source, child) {
             return VWidgetGuard(
+              onPop: (_) async {},
               afterUpdate: (_, from, to) {
-                if (from == addRoute) {
-                  source.loadItems();
-                }
+                // TODO: To many loads
+                Provider.of<DataSource<T>>(context, listen: false).loadItems();
               },
               child: PageSkeleton(
                 title: title,
@@ -119,10 +122,10 @@ class DataTableView<T> extends StatelessWidget {
                             )
                           : Text(title),
                       actions: [
-                        if (addRoute != null)
+                        if (createRoute != null)
                           TextButton.icon(
                             onPressed: () {
-                              context.vRouter.to(addRoute!);
+                              context.vRouter.to(createRoute!);
                             },
                             icon: const Icon(Icons.add_rounded),
                             label: const Text('Hinzufügen'),
@@ -135,7 +138,8 @@ class DataTableView<T> extends StatelessWidget {
                       columns: [
                         ...columns(source.sort),
                         if (deleteRepository != null ||
-                            additionalActions != null)
+                            additionalActions != null ||
+                            getUpdateRoute != null)
                           const DataColumn(label: Text('Aktionen'))
                       ],
                     ),

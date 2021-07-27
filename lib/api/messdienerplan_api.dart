@@ -90,29 +90,6 @@ abstract class MessdienerplanApiClient {
   @DELETE('/groups/{id}/')
   Future<void> deleteGroup(@Path() int id);
 
-  /// Group - Classification Endpoint
-
-  @GET('/groups/{groupId}/classifications/')
-  Future<List<Classification>> getClassifications(@Path() int groupId);
-
-  @GET('/groups/{groupId}/classifications/{id}/')
-  Future<Classification> getClassification(@Path() int groupId, @Path() int id);
-
-  @POST('/groups/{groupId}/classifications/')
-  Future<Classification> postClassification(
-      @Path() int groupId, @Body() Classification classification);
-
-  @PATCH('/groups/{groupId}/classifications/{id}/')
-  Future<Classification> patchClassification(@Path() int groupId,
-      @Path() int id, @Body() Classification classification);
-
-  @PUT('/groups/{groupId}/classifications/{id}/')
-  Future<Classification> putClassification(@Path() int groupId, @Path() int id,
-      @Body() Classification classification);
-
-  @DELETE('/groups/{groupId}/classifications/{id}/')
-  Future<void> deleteClassification(@Path() int groupId, @Path() int id);
-
   /// Plan Endpoint
 
   @GET('/plans/')

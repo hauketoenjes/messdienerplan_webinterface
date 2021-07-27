@@ -14,7 +14,11 @@ class LocationView extends StatelessWidget {
     return DataTableView<Location>(
       title: 'Orte',
       description: 'Hier können Orte erstellt und bearbeitet werden',
-      addRoute: locationsAdd,
+      createRoute: locationsCreate,
+      getUpdateRoute: (item) => locationsUpdate.replaceAll(
+        ':locationId',
+        item.id.toString(),
+      ),
       readAllRepository: locationRepository,
       deleteRepository: locationRepository,
       deleteDialogTitle: 'Ort löschen?',

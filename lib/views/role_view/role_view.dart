@@ -14,7 +14,7 @@ class RoleView extends StatelessWidget {
     return DataTableView<Role>(
       title: 'Rollen',
       description: 'Hier können Rollen erstellt und bearbeitet werden',
-      addRoute: rolesAdd,
+      createRoute: rolesCreate,
       readAllRepository: roleRepository,
       deleteRepository: roleRepository,
       deleteDialogTitle: 'Rolle löschen?',
