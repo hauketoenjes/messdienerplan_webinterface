@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:messdienerplan_webinterface/api/repository/mixins/create.dart'
     as c;
 import 'package:messdienerplan_webinterface/api/repository/mixins/read.dart';
+import 'package:messdienerplan_webinterface/api/repository/mixins/read_all.dart';
 import 'package:messdienerplan_webinterface/api/repository/mixins/update.dart';
 import 'package:messdienerplan_webinterface/widgets/control/future_result_builder.dart';
 import 'package:messdienerplan_webinterface/widgets/panels/base_panel.dart';
@@ -12,7 +14,7 @@ import 'package:messdienerplan_webinterface/misc/extensions/list_extensions.dart
 import 'update_create_view_model.dart';
 
 class UpdateCreateView<T, U> extends StatelessWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
   final String title;
   final String description;
   final T Function() createItem;
@@ -21,7 +23,10 @@ class UpdateCreateView<T, U> extends StatelessWidget {
   final c.Create<T> createRepository;
   final Update<T> updateRepository;
   final Read<T, U> readRepository;
-  final List<Widget> Function(T item) formFields;
+  final List<Widget> Function(
+      T item, List<V> Function<V>() resolveOptionalItems) formFields;
+  final void Function(void Function<U>(ReadAll<U> readAll) register)?
+      optionalReadAllRepositories;
 
   UpdateCreateView({
     Key? key,
@@ -33,6 +38,7 @@ class UpdateCreateView<T, U> extends StatelessWidget {
     required this.readRepository,
     required this.pathParameterName,
     required this.castString,
+    this.optionalReadAllRepositories,
     required this.formFields,
   }) : super(key: key);
 
@@ -57,6 +63,7 @@ class UpdateCreateView<T, U> extends StatelessWidget {
         createRepository: createRepository,
         updateRepository: updateRepository,
         readRepository: readRepository,
+        optionalReadAllRepositories: optionalReadAllRepositories,
       ),
       builder: (context, child) {
         return Consumer<UpdateCreateViewModel<T, U>>(
@@ -71,11 +78,14 @@ class UpdateCreateView<T, U> extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Form(
+                        FormBuilder(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: formFields(item).genericJoin(
+                            children: formFields(
+                              item,
+                              model.resolveOptionalItems,
+                            ).genericJoin(
                               const SizedBox(height: 24),
                             ),
                           ),

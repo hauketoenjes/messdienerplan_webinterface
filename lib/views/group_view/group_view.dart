@@ -15,6 +15,7 @@ class GroupView extends StatelessWidget {
       title: 'Gruppen',
       description: 'Hier können Gruppen erstellt und bearbeitet werden',
       createRoute: groupsCreate,
+      tableRoute: groups,
       getUpdateRoute: (item) => groupsUpdate.replaceAll(
         ':groupId',
         item.id.toString(),

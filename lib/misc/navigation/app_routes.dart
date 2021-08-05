@@ -1,4 +1,5 @@
 import 'package:messdienerplan_webinterface/misc/navigation/vdialog_page.dart';
+import 'package:messdienerplan_webinterface/views/acolyte_view/acolyte_update_create_view.dart';
 import 'package:messdienerplan_webinterface/views/acolyte_view/acolyte_view.dart';
 import 'package:messdienerplan_webinterface/views/group_view/group_update_create_view.dart';
 import 'package:messdienerplan_webinterface/views/group_view/group_view.dart';
@@ -12,6 +13,8 @@ import 'package:vrouter/vrouter.dart';
 const plans = '/plans';
 
 const acolytes = '/acolytes';
+const acolytesCreate = '/acolytes/add';
+const acolytesUpdate = '/acolytes/:acolyteId';
 
 const locations = '/locations';
 const locationsCreate = '/locations/add';
@@ -39,6 +42,16 @@ final routes = <VRouteElement>[
     widget: BaseSkeleton(
       child: AcolyteView(),
     ),
+    stackedRoutes: [
+      VDialogPage(
+        path: acolytesCreate,
+        widget: AcolyteUpdateCreateView(),
+      ),
+      VDialogPage(
+        path: acolytesUpdate,
+        widget: AcolyteUpdateCreateView(),
+      ),
+    ],
   ),
   VWidget(
     path: locations,

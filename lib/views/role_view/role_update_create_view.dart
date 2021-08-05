@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:messdienerplan_webinterface/api/model/models.dart';
 import 'package:messdienerplan_webinterface/api/repository/role_repository.dart';
@@ -19,19 +20,15 @@ class RoleUpdateCreateView extends StatelessWidget {
       readRepository: roleRepository,
       pathParameterName: 'roleId',
       castString: (v) => int.tryParse(v),
-      formFields: (item) => [
+      formFields: (item, _) => [
         BaseFormField(
           title: 'Name',
           isRequired: true,
-          child: TextFormField(
+          child: FormBuilderTextField(
+            name: 'name',
+            onChanged: (value) => item.roleName = value ?? '',
             initialValue: item.roleName,
-            onChanged: (value) => item.roleName = value,
-            decoration: const InputDecoration(isDense: true),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Es muss ein Name eingegeben werden';
-              }
-            },
+            validator: FormBuilderValidators.required(context),
           ),
         ),
       ],

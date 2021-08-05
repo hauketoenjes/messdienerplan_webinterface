@@ -13,6 +13,7 @@ class DataTableView<T> extends StatelessWidget {
   final String title;
   final String description;
   final String? createRoute;
+  final String tableRoute;
   final String Function(T item)? getUpdateRoute;
   final List<DataColumn> Function(
     void Function(
@@ -40,6 +41,7 @@ class DataTableView<T> extends StatelessWidget {
     required this.columns,
     required this.readAllRepository,
     required this.dataCells,
+    required this.tableRoute,
     this.createRoute,
     this.getUpdateRoute,
     this.deleteRepository,
@@ -71,8 +73,10 @@ class DataTableView<T> extends StatelessWidget {
             return VWidgetGuard(
               onPop: (_) async {},
               afterUpdate: (_, from, to) {
-                // TODO: To many loads
-                Provider.of<DataSource<T>>(context, listen: false).loadItems();
+                if (to == tableRoute) {
+                  Provider.of<DataSource<T>>(context, listen: false)
+                      .loadItems();
+                }
               },
               child: PageSkeleton(
                 title: title,
@@ -110,6 +114,7 @@ class DataTableView<T> extends StatelessWidget {
                           ? TextField(
                               textAlignVertical: TextAlignVertical.center,
                               decoration: InputDecoration(
+                                isDense: false,
                                 border: InputBorder.none,
                                 prefixIcon: const Icon(
                                   Icons.search_rounded,

@@ -15,6 +15,7 @@ class LocationView extends StatelessWidget {
       title: 'Orte',
       description: 'Hier können Orte erstellt und bearbeitet werden',
       createRoute: locationsCreate,
+      tableRoute: locations,
       getUpdateRoute: (item) => locationsUpdate.replaceAll(
         ':locationId',
         item.id.toString(),

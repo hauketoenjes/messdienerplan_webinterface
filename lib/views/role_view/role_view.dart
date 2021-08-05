@@ -15,6 +15,11 @@ class RoleView extends StatelessWidget {
       title: 'Rollen',
       description: 'Hier können Rollen erstellt und bearbeitet werden',
       createRoute: rolesCreate,
+      tableRoute: roles,
+      getUpdateRoute: (item) => rolesUpdate.replaceAll(
+        ':roleId',
+        item.id.toString(),
+      ),
       readAllRepository: roleRepository,
       deleteRepository: roleRepository,
       deleteDialogTitle: 'Rolle löschen?',

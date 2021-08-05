@@ -9,6 +9,7 @@ ThemeData getAppTheme(Brightness brightness) {
 
   return theme.copyWith(
     inputDecorationTheme: InputDecorationTheme(
+      isDense: true,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
       ),

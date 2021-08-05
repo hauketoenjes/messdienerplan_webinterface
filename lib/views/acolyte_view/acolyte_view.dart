@@ -5,6 +5,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:messdienerplan_webinterface/api/model/models.dart';
 import 'package:messdienerplan_webinterface/api/repository/acolyte_repository.dart';
 import 'package:messdienerplan_webinterface/api/repository/group_repository.dart';
+import 'package:messdienerplan_webinterface/misc/navigation/app_routes.dart';
 import 'package:messdienerplan_webinterface/widgets/abstract_views/data_table_view/data_table_view.dart';
 import 'package:messdienerplan_webinterface/misc/extensions/date_format_extensions.dart';
 
@@ -20,6 +21,12 @@ class AcolyteView extends StatelessWidget {
       title: 'Messdiener:innen',
       description:
           'Hier können Messdiener:innen erstellt und bearbeitet werden',
+      createRoute: acolytesCreate,
+      tableRoute: acolytes,
+      getUpdateRoute: (item) => acolytesUpdate.replaceAll(
+        ':acolyteId',
+        item.id.toString(),
+      ),
       readAllRepository: acolyteRepository,
       deleteRepository: acolyteRepository,
       deleteDialogTitle: 'Messdiener:in löschen?',

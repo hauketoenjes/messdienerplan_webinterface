@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:messdienerplan_webinterface/api/messdienerplan_api.dart';
@@ -24,7 +25,10 @@ Future<void> main() async {
       debugShowCheckedModeBanner: false,
       theme: getAppTheme(Brightness.light),
       darkTheme: getAppTheme(Brightness.dark),
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      localizationsDelegates: const [
+        ...GlobalMaterialLocalizations.delegates,
+        FormBuilderLocalizations.delegate,
+      ],
       supportedLocales: const [
         Locale('de'),
       ],

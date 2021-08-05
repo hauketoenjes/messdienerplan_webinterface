@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:messdienerplan_webinterface/api/model/models.dart';
 import 'package:messdienerplan_webinterface/api/repository/group_repository.dart';
@@ -22,19 +23,15 @@ class GroupUpdateCreateView extends StatelessWidget {
       readRepository: groupRepository,
       pathParameterName: 'groupId',
       castString: (v) => int.tryParse(v),
-      formFields: (item) => [
+      formFields: (item, _) => [
         BaseFormField(
           title: 'Name',
           isRequired: true,
-          child: TextFormField(
+          child: FormBuilderTextField(
+            name: 'name',
+            onChanged: (value) => item.groupName = value ?? '',
             initialValue: item.groupName,
-            onChanged: (value) => item.groupName = value,
-            decoration: const InputDecoration(isDense: true),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Es muss ein Name eingegeben werden';
-              }
-            },
+            validator: FormBuilderValidators.required(context),
           ),
         ),
         BaseFormField(
